@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- The operator's icon, derived at each size by scripts/make-icons.mjs
+         from source-images/bitlionex-port-icon.webp. Do not hand-edit these
+         files - change the master and run `npm run images`.
+         Two sizes because a 16px tab is still a real case, and letting the
+         browser downscale the 32 would be visibly worse. -->
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#322E80" />
+    <!-- Marks the document as JS enabled so .reveal content hides only when a
+         script will actually reveal it. Without JS everything stays visible,
+         including the prerendered HTML. -->
+    <script>document.documentElement.classList.add('js')</script>
+
+    <!-- Fonts are self hosted, so a page makes no third party request at
+         runtime. That is what lets the privacy policy say so plainly. -->
+    <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Primary metadata. Homepage defaults: scripts/build.mjs REPLACES
+         everything from here down per route, so in production these values
+         never ship. They exist for the dev server, where index.html is served
+         as is. Keep them in step with seo.home in src/data/seo.js or dev and
+         production disagree. -->
+    <title>Bitlionex Port | AI Crypto Research Australia</title>
+    <meta name="description" content="Bitlionex Port turns your crypto holdings into one clear picture, with AI research behind every position. Built for Australia. Open your account." />
+    <meta name="keywords" content="Bitlionex Port, AI crypto research Australia, crypto portfolio tracker Australia, bitcoin portfolio Australia, crypto research platform" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://bitlionexport-au.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Bitlionex Port" />
+    <meta property="og:title" content="Bitlionex Port | AI Crypto Research Australia" />
+    <meta property="og:description" content="Bitlionex Port turns your crypto holdings into one clear picture, with AI research behind every position. Built for Australia. Open your account in minutes." />
+    <meta property="og:url" content="https://bitlionexport-au.com/" />
+    <meta property="og:image" content="https://bitlionexport-au.com/og-image.png" />
+    <meta property="og:image:alt" content="Bitlionex Port, crypto research and portfolio tracking for Australian investors" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_AU" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bitlionex Port | AI Crypto Research Australia" />
+    <meta name="twitter:description" content="Bitlionex Port turns your crypto holdings into one clear picture, with AI research behind every position. Built for Australia. Open your account in minutes." />
+    <meta name="twitter:image" content="https://bitlionexport-au.com/og-image.png" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

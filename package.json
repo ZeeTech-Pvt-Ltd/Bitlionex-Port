@@ -1,0 +1,22 @@
+{
+  "name": "bitlionex-port",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Bitlionex Port - AI assisted crypto research and portfolio tracking for Australian investors.",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/build.mjs",
+    "images": "node scripts/make-icons.mjs && node scripts/make-og.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.0",
+    "sharp": "^0.35.4",
+    "vite": "^8.2.2"
+  }
+}
