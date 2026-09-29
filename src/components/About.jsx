@@ -1,16 +1,7 @@
 import PageHero from './PageHero.jsx'
 import Reveal from './Reveal.jsx'
-import { SuitsYouOrNot, WhereTheLineIs } from './AboutVisuals.jsx'
 import { ABOUT } from '../data/content.js'
 import { Check } from './icons.jsx'
-
-// Which visual goes under which section, keyed by the `visual` field in
-// ABOUT.sections. A section without one simply renders as prose, so adding a
-// picture to another block later is a one-word change in the data.
-const VISUALS = {
-  line: WhereTheLineIs,
-  fit: SuitsYouOrNot,
-}
 
 /**
  * About page.
@@ -19,11 +10,14 @@ const VISUALS = {
  * is for" and "what we are not", are the ones that do the most work: telling
  * someone the product is not for them saves both sides a phone call.
  *
- * Two of the four carry a visual, because a page of nothing but paragraphs
- * reads as filler no matter how good the paragraphs are. They sit OUTSIDE the
- * .prose wrapper on purpose: .prose styles every p, h2 and ul inside it, so a
- * panel nested in there would inherit body-text spacing and colour and come
- * out looking like a paragraph with a border on it.
+ * Three of the four carry an image in a two-column split, alternating right,
+ * left, right down the page. The side is set per section in the data rather
+ * than derived from its position, so moving an image means editing one word
+ * instead of counting from the top.
+ *
+ * The prose sits in its own .prose wrapper and the image outside it, because
+ * .prose styles every p, h2 and ul inside it - which is right for body text
+ * and wrong for anything else that happens to land in the same div.
  */
 export default function About() {
   return (
@@ -33,8 +27,6 @@ export default function About() {
       <section className="section">
         <div className="wrap">
           {ABOUT.sections.map((section) => {
-            const Visual = section.visual ? VISUALS[section.visual] : null
-
             const body = (
               <div className="prose">
                 <h2>{section.heading}</h2>
@@ -54,9 +46,6 @@ export default function About() {
               </div>
             )
 
-            // A section with an image becomes a two-column split. The side is
-            // set per section rather than alternating automatically, so moving
-            // an image means editing the data, not counting from the top.
             if (section.image) {
               const reversed = section.image.side === 'left'
               return (
@@ -82,27 +71,34 @@ export default function About() {
             return (
               <Reveal key={section.id} id={section.id} className="about-block">
                 {body}
-                {Visual && (
-                  <div className="about-visual">
-                    <Visual />
-                  </div>
-                )}
               </Reveal>
             )
           })}
         </div>
       </section>
 
-      <section className="section section--surface section--tight">
+      {/* The same closing band the homepage uses, rather than a lighter
+          variation of it. A page that ends on the same note reads as one site;
+          the earlier version here was a plain tinted strip with centred text
+          and nothing else in it, which looked unfinished next to four sections
+          that all carry an image. */}
+      <section className="section section--tight">
         <div className="wrap">
-          <Reveal className="centered-page__inner" style={{ maxWidth: 640 }}>
+          <Reveal className="cta">
+            <div className="cta__blob cta__blob--a" aria-hidden="true" />
+            <div className="cta__blob cta__blob--b" aria-hidden="true" />
             <h2>{ABOUT.cta.heading}</h2>
-            <p className="lede">{ABOUT.cta.body}</p>
-            <div className="centered-page__actions">
-              <a className="btn btn--primary" href={ABOUT.cta.primaryHref}>
+            <p>{ABOUT.cta.body}</p>
+            <div className="cta__actions">
+              <a className="btn btn--on-deep" href={ABOUT.cta.primaryHref}>
                 {ABOUT.cta.primaryCta}
               </a>
-              <a className="btn btn--ghost" href={ABOUT.cta.secondaryHref} data-scroll="#register">
+              <a
+                className="btn btn--ghost"
+                href={ABOUT.cta.secondaryHref}
+                data-scroll="#register"
+                style={{ color: '#fff', borderColor: 'rgba(255, 255, 255, 0.45)' }}
+              >
                 {ABOUT.cta.secondaryCta}
               </a>
             </div>

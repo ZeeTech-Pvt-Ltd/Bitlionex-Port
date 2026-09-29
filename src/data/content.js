@@ -261,7 +261,12 @@ export const ABOUT = {
     {
       id: 'how-we-work',
       heading: 'How We Work',
-      visual: 'line',
+      // Image on the left, content on the right.
+      image: {
+        src: '/about-2.webp',
+        side: 'left',
+        alt: 'An illustration of someone checking markets on a laptop and a phone, with a currency card beside them.',
+      },
       paras: [
         'We publish research, not advice. That difference matters and we hold to it.',
         'We do not take custody of anything, we do not place trades, and we do not tell you what to buy. Everything on your dashboard is a description of what the data showed, written so you can make your own call.',
@@ -275,7 +280,12 @@ export const ABOUT = {
     {
       id: 'who-its-for',
       heading: 'Who This Is For',
-      visual: 'fit',
+      // Content on the left, image on the right.
+      image: {
+        src: '/about-3.webp',
+        side: 'right',
+        alt: 'An illustration of someone weighing up crypto markets, with one panel of ticks and one of crosses beside them.',
+      },
       paras: [
         'It suits someone who already holds a few coins, has done so for a while, and has reached the point where the spreadsheet is not cutting it any more.',
         'It does not suit anyone looking for signals to copy, guaranteed returns, or someone else to make the decision. We are not that and we are not pretending to be.',
@@ -284,11 +294,12 @@ export const ABOUT = {
     {
       id: 'what-we-are-not',
       heading: 'What We Are Not',
-      // Image on the left, content on the right.
+      // Image on the left, content on the right - fourth in the sequence, so
+      // it carries the fourth side: right, left, right, left.
       image: {
-        src: '/about-2.webp',
+        src: '/about-4.webp',
         side: 'left',
-        alt: 'An illustration of someone checking markets on a laptop and a phone, with a currency card beside them.',
+        alt: 'An illustration of someone considering four crossed-out roles: broker, exchange, fund manager and financial advice.',
       },
       paras: [
         'We are not a broker, an exchange, or a fund manager. We are not a licensed financial adviser and nothing we publish is personal financial advice.',
