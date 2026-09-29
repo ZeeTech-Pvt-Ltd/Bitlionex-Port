@@ -314,8 +314,6 @@ export const CONTACT = {
     'A support team member calls or emails you, in Australian hours, to answer questions.',
     'You decide whether to go ahead. Nothing is charged and nothing moves without your say so.',
   ],
-  asideNote:
-    'We only ask for your name, email and phone number. We never ask for card details, wallet keys or exchange passwords, and you should treat anyone who does as a scam.',
 }
 
 /* -------------------------------------------------------------------------

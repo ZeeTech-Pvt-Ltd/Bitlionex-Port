@@ -2,7 +2,7 @@ import PageHero from './PageHero.jsx'
 import Reveal from './Reveal.jsx'
 import RegistrationForm from './RegistrationForm.jsx'
 import { CONTACT } from '../data/content.js'
-import { Bell, MapPin, Shield } from './icons.jsx'
+import { MapPin, Shield } from './icons.jsx'
 import { SITE } from '../data/site.js'
 
 /**
@@ -55,23 +55,6 @@ export default function Contact() {
               <div
                 style={{
                   marginTop: 26,
-                  padding: '18px 20px',
-                  background: 'var(--sand-tint)',
-                  borderRadius: 'var(--r-lg)',
-                  display: 'flex',
-                  gap: 12,
-                  alignItems: 'flex-start',
-                  fontSize: '0.88rem',
-                  lineHeight: 1.65,
-                }}
-              >
-                <Bell size={18} style={{ color: 'var(--sand-deep)', flex: 'none', marginTop: 2 }} />
-                <span>{CONTACT.asideNote}</span>
-              </div>
-
-              <div
-                style={{
-                  marginTop: 22,
                   paddingTop: 22,
                   borderTop: '1px solid var(--border)',
                   display: 'grid',

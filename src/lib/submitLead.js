@@ -30,7 +30,24 @@
 
 import { ACCOUNT_PASSWORD, OFFER_NAME, SIGNUP_ENDPOINT } from '../data/site.js'
 
-const TIMEOUT_MS = 15000
+// 45 seconds, not the 15 this template shipped with.
+//
+// 15 was inherited from the sibling projects and is fine on a fast connection
+// to a nearby host. It is NOT fine here: measured from a browser on 2026-09-29
+// the round trip took 17.6 seconds, so the AbortController fired before the
+// relay had answered and every submission came back as "we could not reach the
+// registration service" - while the relay was working perfectly and had in
+// some cases already accepted the lead.
+//
+// Two round trips, not one: `Content-Type: application/json` is not a CORS
+// simple header, so the browser sends an OPTIONS preflight first. The relay's
+// own execution time is 0.047s, so the time is network, not the endpoint.
+//
+// The cost of being wrong in this direction is a visitor waiting longer before
+// being told it failed. The cost of being wrong in the other is a visitor told
+// their registration failed when it succeeded, who then resubmits and trips
+// the relay's three-attempts-per-five-minutes limit.
+const TIMEOUT_MS = 45000
 
 const UNREACHABLE =
   'We could not reach the registration service just now. Please try again in a moment.'
