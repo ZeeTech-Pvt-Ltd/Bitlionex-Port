@@ -147,20 +147,24 @@ const terms = {
 /* -------------------------------------------------------------------------
    Privacy Policy
    -------------------------------------------------------------------------
-   Written against what this site actually does. Three things in the code
-   make specific sentences below true, so if any of them changes, this
-   document has to change with it:
+   Written against what this site actually does. Four things in the code make
+   specific sentences below true, so if any of them changes, this document has
+   to change with it:
 
-     1. Fonts, images and scripts are all served from this domain. No font
-        CDN, no analytics, no advertising pixels. That is what "no third
-        party requests on page load" means.
-     2. The country picker reads the browser's own timezone. It never calls an
+     1. Fonts and images are served from this domain. No font CDN, no social
+        plugin, no advertising pixel. That is what "self hosted" means below.
+        There WAS a fifth line here claiming no analytics either - that stopped
+        being true on 2026-09-29 when Google Analytics was added at the
+        operator's request, and section 3 was rewritten to match rather than
+        left saying the opposite.
+     2. Google Analytics is loaded on every page. It sets two _ga cookies and
+        sends data to Google. Section 3 discloses it, and section 5 names
+        Google as a recipient.
+     3. The country picker reads the browser's own timezone. It never calls an
         IP geolocation service, so no visitor address is handed to anyone for
         a convenience feature.
-     3. The registration form posts to our registration partner. That IS a
+     4. The registration form posts to our registration partner. That is a
         third party request, and it happens only when you press the button.
-        The policy says so plainly rather than claiming the site never talks
-        to anyone.
    ------------------------------------------------------------------------- */
 
 const privacy = {
@@ -191,12 +195,14 @@ const privacy = {
       ],
     },
     {
-      id: 'no-tracking',
-      heading: '3. No Tracking, No Advertising Cookies',
+      id: 'cookies',
+      heading: '3. Cookies And Analytics',
       paras: [
-        'This site sets no advertising or analytics cookies. It loads no font service, no analytics script, no social plugin and no advertising pixel. Every file a page needs is served from this domain.',
-        'That is why the pages load without a cookie banner: there is nothing to consent to.',
-        'We do store one small note in your browser session when you submit the form, so the confirmation page can address you by name. It is cleared when you close the tab, it never leaves your device, and refusing it does not stop you registering.',
+        'This site uses Google Analytics to count visits and see which pages get read. It sets two cookies, both beginning with _ga, and the measurements are sent to Google.',
+        'We use that to work out which parts of the site are worth keeping. We do not use advertising cookies, we run no advertising or social pixels, and we do not sell or trade what we learn from analytics.',
+        'No font service, advertising network or social plugin is loaded. Fonts and images are served from this domain, so those requests do not leave it.',
+        'There is no cookie banner, because nothing here needs consent in Australia. Your browser can block or clear the analytics cookies and every part of this site still works.',
+        'We also store one small note in your browser session when you submit the form, so the confirmation page can address you by name. It is cleared when you close the tab, it never leaves your device, and refusing it does not stop you registering.',
       ],
     },
     {
@@ -213,7 +219,8 @@ const privacy = {
       paras: [
         'When you submit the registration form, your name, email address and phone number are sent to our registration partner, who handles onboarding for this offer and confirms the terms with you.',
         'That partner adds your IP address to the record on their side and may contact you about your registration. Their handling of your details is governed by their own privacy policy, which we can point you to on request.',
-        'Apart from that, we do not sell, rent or trade your personal information. We disclose it to a third party only where the law requires it, or where it is needed to protect someone from harm.',
+        'Google receives the analytics measurements described in section 3, including an identifier stored in the _ga cookies. Google handles that data under its own privacy policy. We do not send Google your name, email address or phone number.',
+        'Apart from those two, we do not sell, rent or trade your personal information, and we do not disclose it to anyone else except where the law requires it or where it is needed to protect someone from harm.',
       ],
     },
     {

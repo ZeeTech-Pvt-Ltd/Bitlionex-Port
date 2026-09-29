@@ -2,7 +2,6 @@ import SectionHead from './SectionHead.jsx'
 import Reveal from './Reveal.jsx'
 import MethodVisual from './MethodVisual.jsx'
 import { METHOD } from '../data/content.js'
-import { Alert } from './icons.jsx'
 
 /**
  * Method - how the research is put together, and what it cannot do.
@@ -24,36 +23,6 @@ export default function Method() {
               </p>
             ))}
 
-            <div
-              style={{
-                marginTop: 28,
-                padding: '20px 22px',
-                background: 'var(--sand-tint)',
-                borderRadius: 'var(--r-lg)',
-                border: '1px solid var(--border)',
-              }}
-            >
-              <h3
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 9,
-                  fontSize: '1rem',
-                  color: 'var(--sand-deep)',
-                  marginBottom: 12,
-                }}
-              >
-                <Alert size={19} />
-                {METHOD.limitsHeading}
-              </h3>
-              <ul style={{ listStyle: 'none', display: 'grid', gap: 10 }}>
-                {METHOD.limits.map((l) => (
-                  <li key={l} style={{ fontSize: '0.9rem', color: 'var(--ink)', lineHeight: 1.6 }}>
-                    {l}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </Reveal>
 
           <Reveal className="split__visual">

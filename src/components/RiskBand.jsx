@@ -51,32 +51,9 @@ export default function RiskBand() {
               })}
             </ul>
 
-            <p
-              style={{
-                marginTop: 30,
-                paddingTop: 24,
-                borderTop: '1px solid rgba(255, 255, 255, 0.18)',
-                color: 'rgba(255, 255, 255, 0.86)',
-                fontSize: '0.95rem',
-                lineHeight: 1.7,
-              }}
-            >
-              {RISK.closing}
-            </p>
           </Reveal>
 
           <Reveal>
-            <h3 style={{ marginBottom: 10 }}>{RISK.drawdownHeading}</h3>
-            <p
-              style={{
-                color: 'rgba(255, 255, 255, 0.82)',
-                fontSize: '0.95rem',
-                lineHeight: 1.7,
-                marginBottom: 24,
-              }}
-            >
-              {RISK.drawdownBody}
-            </p>
             <img
               className="section-figure"
               src="/market-app.webp"

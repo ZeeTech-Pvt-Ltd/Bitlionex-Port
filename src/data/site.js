@@ -8,13 +8,6 @@ export const BRAND_PORT = 'Port'
 export const DOMAIN = 'bitlionexport-au.com'
 export const SITE = `https://${DOMAIN}`
 
-export const TAGLINE = 'Crypto research, made clear'
-
-// The sentence the footer and the legal pages use to describe what this is.
-// Deliberately narrow: a research and tracking tool, not a broker.
-export const WHAT_THIS_IS =
-  'Bitlionex Port is a research and portfolio tracking service. We do not hold your funds, place trades for you, or give personal financial advice.'
-
 // Where the registration form posts. Changing this host means changing the
 // connect-src line in vercel.json too, or the request is blocked in
 // production while every local check still passes.

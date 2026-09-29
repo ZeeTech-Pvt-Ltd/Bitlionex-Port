@@ -59,8 +59,6 @@ function series(seed, count, start, drift, vol) {
   return out
 }
 
-const round2 = (n) => Math.round(n * 100) / 100
-
 /* -------------------------------------------------------------------------
    The market strip under the hero
    ------------------------------------------------------------------------- */
@@ -91,19 +89,6 @@ export const HERO_TILES = [
 ]
 
 /* -------------------------------------------------------------------------
-   Allocation ring - five slices, which is inside the six-segment ceiling
-   where a part-to-whole ring still reads at a glance.
-   ------------------------------------------------------------------------- */
-
-export const ALLOCATION = [
-  { label: 'Bitcoin', weight: 38, tone: 'var(--series-1)' },
-  { label: 'Ethereum', weight: 24, tone: 'var(--series-2)' },
-  { label: 'Large cap altcoins', weight: 18, tone: 'var(--series-3)' },
-  { label: 'Stablecoins', weight: 14, tone: 'var(--series-4)' },
-  { label: 'Unallocated cash', weight: 6, tone: 'var(--seq-1)' },
-]
-
-/* -------------------------------------------------------------------------
    Signal scorecard - what the research layer publishes on each asset.
    ------------------------------------------------------------------------- */
 
@@ -113,23 +98,6 @@ export const SIGNALS = [
   { label: 'Volatility', score: 41 },
   { label: 'Concentration', score: 63 },
   { label: 'Data coverage', score: 86 },
-]
-
-/* -------------------------------------------------------------------------
-   Drawdown - the same shape the risk section plots. Deliberately an
-   unflattering one: a 34% peak-to-trough fall is the number most people
-   signing up have not sat through yet.
-   ------------------------------------------------------------------------- */
-
-export const DRAWDOWN = series(4242, 40, 100, -0.004, 0.026).map((v) => ({
-  peak: 100,
-  value: round2(v),
-}))
-
-export const DRAWDOWN_STATS = [
-  { label: 'Largest fall shown', value: '-34%' },
-  { label: 'Longest recovery', value: '11 months' },
-  { label: 'Days underwater', value: '268' },
 ]
 
 /* -------------------------------------------------------------------------
@@ -155,25 +123,6 @@ export const STEPS = [
     body:
       'Your dashboard shows what moved, how much of your money sits in one place, and which positions the research has turned cautious on. You decide what to do with that. We never trade for you.',
   },
-]
-
-/* -------------------------------------------------------------------------
-   Method - how the research is put together. Named sources, so a reader can
-   judge the inputs rather than take the output on trust.
-   ------------------------------------------------------------------------- */
-
-export const METHOD_INPUTS = [
-  { label: 'Spot price feeds', detail: 'Major exchanges, checked continuously' },
-  { label: 'Order book depth', detail: 'How easily a position could be exited' },
-  { label: 'On chain activity', detail: 'Network flows and holder behaviour' },
-  { label: 'Derivatives positioning', detail: 'Funding rates and open interest' },
-  { label: 'Published research', detail: 'Public filings, protocol updates, releases' },
-]
-
-export const METHOD_LIMITS = [
-  'A score is a summary of what the data showed today. It is not a prediction.',
-  'Thin markets produce thin data. Where coverage is poor, the score says so instead of guessing.',
-  'No model has seen the next twelve months. Ours has not either.',
 ]
 
 /* -------------------------------------------------------------------------

@@ -51,7 +51,7 @@ export default function Faq({
                 onClick={() => setOpen(isOpen ? null : i)}
               >
                 <span>{item.q}</span>
-                <ChevronDown size={19} />
+                <ChevronDown size={19} className="faq__chev" />
               </button>
             </Heading>
             <div

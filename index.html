@@ -24,6 +24,22 @@
     <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="manifest" href="/site.webmanifest" />
 
+    <!-- Search Console ownership proof. -->
+    <meta name="google-site-verification" content="YyVFUxLa1PAaG7913GQyzgz0fg0yfj4dxL6nJIf_vCk" />
+
+    <!-- Google Analytics. Both this and the inline script above are INLINE, so
+         production's Content-Security-Policy has to allow inline script or the
+         tag is blocked. See the script-src note in vercel.json - that directive
+         was missing entirely until 2026-09-29 and was silently blocking the
+         `js` class on <html> as well. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FC2EL0H3VM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FC2EL0H3VM');
+    </script>
+
     <!-- Primary metadata. Homepage defaults: scripts/build.mjs REPLACES
          everything from here down per route, so in production these values
          never ship. They exist for the dev server, where index.html is served

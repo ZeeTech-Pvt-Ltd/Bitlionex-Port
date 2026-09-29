@@ -81,19 +81,6 @@ export const METHOD = {
     'Every position is scored on trend, liquidity, volatility, concentration and data coverage. Five measures, each built from the inputs below.',
     'Where the data is thin, the coverage score drops and the panel says so. We would rather show you a gap than fill it with a guess.',
   ],
-  inputs: [
-    'Spot price feeds',
-    'Order book depth',
-    'Network activity',
-    'Derivatives positioning',
-    'Published research',
-  ],
-  limitsHeading: 'What A Score Cannot Do',
-  limits: [
-    'A score describes what the data showed today. It is not a prediction.',
-    'Thin markets produce thin data. Where coverage is poor, the score says so instead of guessing.',
-    'No model has seen the next twelve months. Ours has not either.',
-  ],
 }
 
 /* -------------------------------------------------------------------------
@@ -117,11 +104,6 @@ export const RISK = {
   lede:
     'Crypto is volatile. You can lose money, including money you put in this week. We would rather you knew that now than found out later.',
   risks: RISKS,
-  drawdownHeading: 'What A Fall Actually Looks Like',
-  drawdownBody:
-    'Below is an illustrative example of a portfolio going through a sustained fall. It is not a forecast and not a record of anyone’s results. It is here so the shape of a bad year is something you have seen once already.',
-  closing:
-    'If that shape is one you would not sit through, then this is not the right place for your money. That is a genuinely useful thing to know before you type your phone number in.',
 }
 
 /* -------------------------------------------------------------------------

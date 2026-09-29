@@ -37,9 +37,15 @@
    ========================================================================= */
 
 /* -------------------------------------------------------------------------
-   Fonts - self-hosted latin subsets, so a page makes no third-party request
-   at runtime. That is what lets the privacy policy state plainly that the
-   site sends nothing anywhere.
+   Fonts - self-hosted latin subsets, so no font service sees a visitor's
+   request. That is what lets the privacy policy say the fonts are served from
+   this domain.
+
+   Note it does NOT mean the page makes no third party request: Google
+   Analytics is loaded from googletagmanager.com and reports to Google, and it
+   has been since 2026-09-29. The policy discloses that in section 3. This
+   comment said "no third-party request at runtime" until then, which stopped
+   being true the moment the tag went in.
    ------------------------------------------------------------------------- */
 
 @font-face {
@@ -975,79 +981,23 @@ ol {
    Cards & panels
    ------------------------------------------------------------------------- */
 
-.card {
-  background: var(--paper);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 26px;
-}
 
-.card--flat {
-  box-shadow: none;
-}
 
-.card--raise {
-  box-shadow: var(--shadow-md);
-  border-color: transparent;
-}
 
-.card__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: var(--r-md);
-  background: var(--indigo-tint);
-  color: var(--indigo-strong);
-  margin-bottom: 16px;
-}
 
-.card__icon--mint {
-  background: var(--mint-tint);
-  color: var(--mint-deep);
-}
 
-.card__icon--sand {
-  background: var(--sand-tint);
-  color: var(--sand-deep);
-}
 
-.card h3 {
-  margin-bottom: 9px;
-}
 
-.card p {
-  color: var(--muted);
-  font-size: 0.95rem;
-}
 
-.grid-2 {
-  display: grid;
-  gap: 22px;
-}
 
-.grid-3 {
-  display: grid;
-  gap: 22px;
+
+@media (min-width: 720px) {
 }
 
 @media (min-width: 720px) {
-  .grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 720px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (min-width: 1000px) {
-  .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 /* Split: copy on one side, a visual on the other. */
@@ -1158,9 +1108,6 @@ ol {
   margin-top: 44px;
 }
 
-.about-visual {
-  margin-top: 28px;
-}
 
 /* An About section that carries an image is a two-column split, so the prose
    inside it has to stop being a full-width measure. .prose is capped at 760px
@@ -1173,90 +1120,25 @@ ol {
 /* The two-column panel used by the About page visuals. Two of them sit on the
    same page, so they share one pattern rather than being styled separately and
    drifting apart. */
-.about-panel {
-  max-width: 560px;
-}
 
-.duty {
-  display: grid;
-  gap: 22px;
-}
 
 @media (min-width: 520px) {
-  .duty {
-    grid-template-columns: 1fr 1fr;
-    gap: 26px;
-  }
 
   /* A divider between the columns, drawn as a border rather than an element so
      it disappears when they stack. */
-  .duty__col + .duty__col {
-    padding-left: 26px;
-    border-left: 1px solid var(--border);
-  }
 }
 
-.duty__who {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin-bottom: 13px;
-}
 
-.duty__col--us .duty__who {
-  color: var(--indigo-strong);
-}
 
-.duty__col--yes .duty__who {
-  color: var(--mint-deep);
-}
 
-.duty__col--no .duty__who {
-  color: var(--danger);
-}
 
-.duty__col ul {
-  list-style: none;
-  display: grid;
-  gap: 10px;
-}
 
-.duty__col li {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  font-size: 0.87rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
 
-.duty__col li svg {
-  flex: none;
-  margin-top: 3px;
-}
 
-.duty__col--yes li svg {
-  color: var(--mint-deep);
-}
 
-.duty__col--no li svg {
-  color: var(--danger);
-}
 
 /* The line that closes each panel. The point of both panels is the sentence
    underneath them, so it gets the weight rather than the list. */
-.about-panel__foot {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-  font-size: 0.85rem;
-  color: var(--ink);
-  line-height: 1.6;
-}
 
 /* A supplied illustration standing in for a data panel. No card around it -
    the artwork carries its own background and its own shape, and wrapping it in
@@ -1305,9 +1187,6 @@ ol {
   stroke-linejoin: round;
 }
 
-.chart__area {
-  opacity: 0.1;
-}
 
 .chart__dot {
   stroke: var(--paper);
@@ -1322,27 +1201,8 @@ ol {
   margin-top: 16px;
 }
 
-.legend__item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  color: var(--muted);
-}
 
-.legend__swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  flex: none;
-}
 
-.legend__key {
-  width: 16px;
-  height: 2px;
-  border-radius: 2px;
-  flex: none;
-}
 
 /* Stat tiles */
 .tiles {
@@ -1442,75 +1302,19 @@ ol {
 }
 
 /* Allocation ring */
-.ring {
-  display: grid;
-  gap: 24px;
-  align-items: center;
-}
 
 @media (min-width: 520px) {
-  .ring {
-    grid-template-columns: 190px 1fr;
-    gap: 30px;
-  }
 }
 
-.ring__chart {
-  position: relative;
-  width: 100%;
-  max-width: 190px;
-  margin: 0 auto;
-}
 
-.ring__center {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  text-align: center;
-}
 
-.ring__center-label {
-  font-size: 0.75rem;
-  color: var(--muted);
-}
 
-.ring__center-value {
-  font-family: var(--font-display);
-  font-size: 1.34rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
 
 /* The ring's readable twin: the same numbers as rows, so identity never
    depends on colour alone. */
-.ring__list {
-  list-style: none;
-  display: grid;
-  gap: 11px;
-}
 
-.ring__item {
-  display: grid;
-  grid-template-columns: 12px 1fr auto;
-  align-items: center;
-  gap: 11px;
-  font-size: 0.88rem;
-}
 
-.ring__dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-}
 
-.ring__pct {
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
 
 /* -------------------------------------------------------------------------
    How it works - numbered steps

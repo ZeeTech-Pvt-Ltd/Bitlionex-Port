@@ -9,9 +9,15 @@
 // WHY NOT IP GEOLOCATION. The sibling projects ask a third-party service
 // (ipinfo.io, ipwho.is, ipapi.co) where the visitor is, which means every page
 // load hands someone else the visitor's IP address. That is a real privacy
-// cost for a convenience feature, and it contradicts a privacy policy that
-// says the site makes no third-party requests. The browser already knows what
-// timezone it is in, and reading it costs nothing and tells no one.
+// cost for a convenience feature, and it is one the site does not need to pay:
+// the browser already knows what timezone it is in, and reading it costs
+// nothing and tells no one.
+//
+// (The original reasoning here leaned on the privacy policy claiming the site
+// made no third party requests at all. That stopped being strictly true when
+// Google Analytics was added - see section 3 of the policy - but the decision
+// stands on its own: handing an address to a fourth party to guess a flag
+// would still be a bad trade.)
 //
 // The trade-off is accuracy: a timezone covers a whole region, so this picks
 // the country most people in that zone are in. Someone in a zone that spans

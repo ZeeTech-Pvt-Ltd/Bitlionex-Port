@@ -222,7 +222,7 @@ export default function RegistrationForm() {
       <button type="submit" className="btn btn--primary btn--block form__submit" disabled={submitting}>
         {submitting ? (
           <>
-            <Loader size={17} />
+            <Loader size={17} className="spin" />
             Setting up your account…
           </>
         ) : (

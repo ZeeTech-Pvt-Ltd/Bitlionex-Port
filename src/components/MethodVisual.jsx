@@ -1,5 +1,5 @@
 import { Sparkline } from './charts.jsx'
-import { HERO_SPARK, METHOD_INPUTS, SIGNALS } from '../data/market.js'
+import { HERO_SPARK, SIGNALS } from '../data/market.js'
 
 /**
  * MethodVisual - the scorecard, opened up.
@@ -59,31 +59,6 @@ export default function MethodVisual() {
           <p style={{ fontSize: '0.76rem', color: 'var(--muted)' }}>Same measure, plotted</p>
         </div>
         <Sparkline data={HERO_SPARK} tone="var(--series-2)" width={120} height={36} label="Trend measure across 22 sessions" />
-      </div>
-
-      <div style={{ marginTop: 22, paddingTop: 18, borderTop: '1px solid var(--border)' }}>
-        <p style={{ fontSize: '0.82rem', fontWeight: 600, marginBottom: 12 }}>What feeds the scores</p>
-        <ul style={{ listStyle: 'none', display: 'grid', gap: 10 }}>
-          {METHOD_INPUTS.map((input) => (
-            <li key={input.label} style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-              <span
-                aria-hidden="true"
-                style={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: 2,
-                  background: 'var(--series-2)',
-                  flex: 'none',
-                  transform: 'translateY(-2px)',
-                }}
-              />
-              <span style={{ fontSize: '0.86rem' }}>
-                <strong style={{ fontWeight: 600 }}>{input.label}</strong>
-                <span style={{ color: 'var(--muted)' }}>, {input.detail.toLowerCase()}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
       </div>
 
     </div>

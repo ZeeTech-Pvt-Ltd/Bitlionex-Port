@@ -11,7 +11,7 @@
  * that is the only content of a control gets its label from that control.
  */
 
-const base = (size) => ({
+const base = (size, className) => ({
   width: size,
   height: size,
   viewBox: '0 0 24 24',
@@ -22,66 +22,67 @@ const base = (size) => ({
   strokeLinejoin: 'round',
   'aria-hidden': true,
   focusable: false,
+  className,
 })
 
-export const Check = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Check = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="M20 6 9 17l-5-5" />
   </svg>
 )
 
-export const CheckCircle = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const CheckCircle = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <circle cx="12" cy="12" r="9" />
     <path d="m8.5 12 2.5 2.5 4.5-5" />
   </svg>
 )
 
-export const ChevronDown = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const ChevronDown = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="m6 9 6 6 6-6" />
   </svg>
 )
 
-export const ArrowRight = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const ArrowRight = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="M5 12h14" />
     <path d="m13 6 6 6-6 6" />
   </svg>
 )
 
-export const Menu = ({ size = 20 }) => (
-  <svg {...base(size)}>
+export const Menu = ({ size = 20, className }) => (
+  <svg {...base(size, className)}>
     <path d="M4 7h16" />
     <path d="M4 12h16" />
     <path d="M4 17h16" />
   </svg>
 )
 
-export const Close = ({ size = 20 }) => (
-  <svg {...base(size)}>
+export const Close = ({ size = 20, className }) => (
+  <svg {...base(size, className)}>
     <path d="M6 6 18 18" />
     <path d="M18 6 6 18" />
   </svg>
 )
 
-export const Alert = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Alert = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" />
     <path d="M12 9v4" />
     <path d="M12 17h.01" />
   </svg>
 )
 
-export const Shield = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Shield = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
     <path d="m9 12 2 2 4-4" />
   </svg>
 )
 
-export const Loader = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Loader = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="M12 3v4" />
     <path d="M12 17v4" />
     <path d="M5.6 5.6 8.5 8.5" />
@@ -93,51 +94,44 @@ export const Loader = ({ size = 18 }) => (
   </svg>
 )
 
-export const Search = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Search = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <circle cx="11" cy="11" r="7" />
     <path d="m20 20-3.5-3.5" />
   </svg>
 )
 
-export const Bell = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Bell = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="M18 8a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7" />
     <path d="M13.7 20a2 2 0 0 1-3.4 0" />
   </svg>
 )
 
-export const Layers = ({ size = 18 }) => (
-  <svg {...base(size)}>
-    <path d="m12 2 9 5-9 5-9-5 9-5Z" />
-    <path d="m3 12 9 5 9-5" />
-    <path d="m3 17 9 5 9-5" />
-  </svg>
-)
 
-export const Compass = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Compass = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <circle cx="12" cy="12" r="9" />
     <path d="m15.5 8.5-2 5.2-5.2 2 2-5.2 5.2-2Z" />
   </svg>
 )
 
-export const TrendDown = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const TrendDown = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="m3 7 6.5 6.5 4-4L21 17" />
     <path d="M21 12v5h-5" />
   </svg>
 )
 
-export const Clock = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Clock = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <circle cx="12" cy="12" r="9" />
     <path d="M12 7v5l3.5 2" />
   </svg>
 )
 
-export const User = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const User = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <circle cx="12" cy="8" r="4" />
     <path d="M4.5 21a7.5 7.5 0 0 1 15 0" />
   </svg>
@@ -155,8 +149,8 @@ export const User = ({ size = 18 }) => (
  * it read as a hump, not a dial. Ending it short of the rim is what makes the
  * needle legible as a separate mark.
  */
-export const Gauge = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Gauge = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="M4 17.5a8 8 0 0 1 16 0" />
     <path d="m12 17.5 4.2-6.2" />
     <circle cx="12" cy="17.5" r="1.5" fill="currentColor" stroke="none" />
@@ -171,8 +165,8 @@ export const Gauge = ({ size = 18 }) => (
  * and the wrong one here - the risk being described is one holding quietly
  * becoming most of the portfolio, which an even split does not show.
  */
-export const PieChart = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const PieChart = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <circle cx="12" cy="12" r="9" />
     <path d="M12 12V3" />
     <path d="M12 12 5.6 18.4" />
@@ -187,22 +181,22 @@ export const PieChart = ({ size = 18 }) => (
  * a battery at 19px; the protruding clasp is the one detail that makes a
  * wallet a wallet at this size.
  */
-export const Wallet = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Wallet = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="M19 8V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1" />
     <path d="M21 10h-3.5a2 2 0 0 0 0 4H21z" />
   </svg>
 )
 
-export const Mail = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const Mail = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <rect x="3" y="5" width="18" height="14" rx="2" />
     <path d="m3.5 7 8.5 6 8.5-6" />
   </svg>
 )
 
-export const MapPin = ({ size = 18 }) => (
-  <svg {...base(size)}>
+export const MapPin = ({ size = 18, className }) => (
+  <svg {...base(size, className)}>
     <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
     <circle cx="12" cy="10" r="3" />
   </svg>
