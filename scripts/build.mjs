@@ -29,12 +29,13 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 import { BRAND, SITE } from '../src/data/site.js'
 import {
   INDEXABLE,
-  OG_IMAGE,
-  OG_IMAGE_ALT,
+  ogImageAltFor,
+  ogImageFor,
   schemasFor,
   seo,
 } from '../src/data/seo.js'
 import { FAQ_ITEMS } from '../src/data/content.js'
+import { STEPS } from '../src/data/market.js'
 import { LEGAL_DOCS, countPlaceholders, PLACEHOLDER_TOKEN } from '../src/data/legal.js'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -64,7 +65,7 @@ const OUTPUT = {
 
 // The per route <title>/meta/canonical/OG/Twitter block. Mirrors Seo.jsx
 // field for field.
-function headMeta(conf) {
+function headMeta(conf, route) {
   const L = []
   L.push(`    <title>${escT(conf.title)}</title>`)
   L.push(`    <meta name="description" content="${escA(conf.description)}" />`)
@@ -79,8 +80,8 @@ function headMeta(conf) {
     'og:title': conf.title,
     'og:description': conf.description,
     'og:url': conf.canonical || `${SITE}/`,
-    'og:image': OG_IMAGE,
-    'og:image:alt': OG_IMAGE_ALT,
+    'og:image': ogImageFor(route),
+    'og:image:alt': ogImageAltFor(route),
     'og:image:width': '1200',
     'og:image:height': '630',
     'og:image:type': 'image/png',
@@ -95,7 +96,7 @@ function headMeta(conf) {
     'twitter:card': 'summary_large_image',
     'twitter:title': conf.title,
     'twitter:description': conf.description,
-    'twitter:image': OG_IMAGE,
+    'twitter:image': ogImageFor(route),
   }
   for (const [k, v] of Object.entries(tw)) {
     L.push(`    <meta name="${k}" content="${escA(v)}" />`)
@@ -111,7 +112,7 @@ function headMeta(conf) {
  */
 function jsonLd(route) {
   const faqItems = route === 'home' || route === 'faq' ? FAQ_ITEMS : []
-  return schemasFor(route, faqItems)
+  return schemasFor(route, faqItems, STEPS)
     .map(
       (data) =>
         `    <script type="application/ld+json" data-seo-jsonld="true">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`,
@@ -120,7 +121,7 @@ function jsonLd(route) {
 }
 
 function docFor(prefix, staticHead, style, moduleTag, body, conf, route) {
-  const meta = headMeta(conf)
+  const meta = headMeta(conf, route)
   const ld = jsonLd(route)
   return `${prefix}
 ${staticHead.trimEnd()}
@@ -171,7 +172,6 @@ Sitemap: ${SITE}/sitemap.xml
 }
 
 function sitemapXml() {
-  const today = new Date().toISOString().slice(0, 10)
   const urls = INDEXABLE.map((route) => {
     const conf = seo[route]
     const loc = conf.canonical
@@ -181,7 +181,7 @@ function sitemapXml() {
     const changefreq = route === 'home' ? 'weekly' : 'monthly'
     return `  <url>
     <loc>${loc}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${conf.updated}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`

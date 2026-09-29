@@ -1,29 +1,36 @@
-// Renders the social share card, public/og-image.png (1200x630).
+// Renders one social share card per indexable route, public/og-<route>.png
+// (1200x630 each).
 //
 //   npm run images
 //
-// The card is generated rather than hand drawn so the palette and the mark
-// stay tied to the design tokens: change a colour in src/index.css, re-run
-// this, and the card follows.
+// One card per page rather than one card for the whole site. A single shared
+// image meant every page unfurled identically, so a link to the FAQ and a link
+// to the Risk Disclosure looked the same in a feed and neither said what it
+// was. The copy for each card lives in src/data/seo.js next to the page's
+// title, so the two are edited together.
 //
-// The MARK is the operator's own artwork, embedded from the master icon
-// rather than redrawn, so the card cannot drift from the header logo, the
-// favicon or the app icon. The other icon sizes are produced by
-// scripts/make-icons.mjs; this script only makes the card.
+// The cards are generated rather than hand drawn so the palette and the mark
+// stay tied to the design tokens: change a colour in src/index.css, re-run
+// this, and every card follows.
+//
+// The MARK is the operator's own artwork, embedded from the master icon rather
+// than redrawn, so a card cannot drift from the header logo, the favicon or
+// the app icon. The other icon sizes come from scripts/make-icons.mjs.
 //
 // Output is committed. This is NOT part of `npm run build`, because a build
 // machine without a rasteriser should still be able to ship the site.
-import { mkdirSync, readFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, rmSync, existsSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
+import { seo } from '../src/data/seo.js'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const OUT = path.join(ROOT, 'public')
 const MASTER = path.join(ROOT, 'source-images', 'bitlionex-port-icon.webp')
 
 // Mirrors the tokens in src/index.css. Kept in step by hand, because this
-// script runs rarely and a stale hex here is visible the moment the card is
+// script runs rarely and a stale hex here is visible the moment a card is
 // looked at.
 const BG = '#F7F7FC'
 const PAPER = '#FFFFFF'
@@ -37,20 +44,23 @@ const BORDER = '#E2E2EE'
 // The site sets headings in Instrument Sans, but this SVG is rasterised by
 // librsvg, which can only reach fonts installed on the machine, not the WOFF2
 // in public/fonts. A system sans is the closest thing that renders reliably
-// here. The card is a static asset, so an exact match matters less than the
+// here. A card is a static asset, so an exact match matters less than the
 // palette and the layout being right.
 const SANS = 'Helvetica, Arial, sans-serif'
 
+const esc = (s) =>
+  String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
 // The mark, inline. A PNG data URI rather than a drawn approximation: the
 // artwork is two offset rings, two arrows and a diagonal gradient, and the
-// card is the one place someone sees it next to the page it came from.
+// card is often the first thing someone sees.
 const markPng = await sharp(MASTER)
   .resize(168, 168, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
   .png()
   .toBuffer()
 const MARK = `data:image/png;base64,${markPng.toString('base64')}`
 
-const ogSvg = `
+const cardSvg = ({ line1, line2, note }) => `
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="${BG}"/>
 
@@ -70,15 +80,15 @@ const ogSvg = `
 
   <!-- Headline. Tracking is negative to match the h1 treatment on the page. -->
   <text x="92" y="330" font-family="${SANS}" font-weight="600" letter-spacing="-1.8"
-        font-size="62" fill="${INK}">Your crypto holdings,</text>
+        font-size="62" fill="${INK}">${esc(line1)}</text>
   <text x="92" y="406" font-family="${SANS}" font-weight="600" letter-spacing="-1.8"
-        font-size="62" fill="${INDIGO_MID}">in one clear picture.</text>
+        font-size="62" fill="${INDIGO_MID}">${esc(line2)}</text>
 
   <rect x="92" y="446" width="104" height="5" rx="2.5" fill="${MINT}"/>
 
-  <text x="92" y="506" font-family="${SANS}" font-size="25" fill="${MUTED}">AI assisted research and portfolio tracking for Australian investors.</text>
+  <text x="92" y="506" font-family="${SANS}" font-size="25" fill="${MUTED}">${esc(note)}</text>
 
-  <!-- No figure anywhere on this card, deliberately. A number on a social
+  <!-- No figure anywhere on any card, deliberately. A number on a social
        preview is a number nobody can source and nobody can correct. -->
   <text x="1108" y="564" font-family="${SANS}" font-size="21" fill="${INK}"
         text-anchor="end" font-weight="600">bitlionexport-au.com</text>
@@ -87,6 +97,26 @@ const ogSvg = `
 
 mkdirSync(OUT, { recursive: true })
 
-await sharp(Buffer.from(ogSvg)).png({ compressionLevel: 9 }).toFile(path.join(OUT, 'og-image.png'))
+// Every route that carries card copy gets one. thank-you and the 404 do not:
+// both are noindex, so nothing should ever unfurl them, and ogImageFor() falls
+// back to the home card if something does.
+const routes = Object.entries(seo).filter(([, conf]) => conf.card)
+if (!routes.length) throw new Error('No routes in src/data/seo.js carry card copy.')
 
-console.log('[og] wrote public/og-image.png (1200x630), mark embedded from the master icon')
+const written = []
+for (const [route, conf] of routes) {
+  const file = path.join(OUT, `og-${route}.png`)
+  await sharp(Buffer.from(cardSvg(conf.card))).png({ compressionLevel: 9 }).toFile(file)
+  written.push(`og-${route}.png`)
+}
+
+// The single shared card this replaces. Removed rather than left behind: it
+// would ship unreferenced, and the build's asset check flags exactly that.
+const old = path.join(OUT, 'og-image.png')
+if (existsSync(old)) {
+  rmSync(old)
+  console.log('[og] removed public/og-image.png (superseded by the per-route cards)')
+}
+
+console.log(`[og] wrote ${written.length} cards at 1200x630, mark embedded from the master icon:`)
+console.log(`     ${written.join(', ')}`)

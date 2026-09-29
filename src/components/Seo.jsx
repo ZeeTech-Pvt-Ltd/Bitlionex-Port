@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { BRAND, SITE } from '../data/site.js'
-import { OG_IMAGE, OG_IMAGE_ALT, schemasFor, seo } from '../data/seo.js'
+import { ogImageAltFor, ogImageFor, schemasFor, seo } from '../data/seo.js'
 import { FAQ_ITEMS } from '../data/content.js'
+import { STEPS } from '../data/market.js'
 
 /**
  * Seo - per-route head management.
@@ -74,8 +75,8 @@ export default function Seo({ route }) {
       'og:title': conf.title,
       'og:description': conf.description,
       'og:url': conf.canonical || `${SITE}/`,
-      'og:image': OG_IMAGE,
-      'og:image:alt': OG_IMAGE_ALT,
+      'og:image': ogImageFor(route),
+      'og:image:alt': ogImageAltFor(route),
       'og:image:width': '1200',
       'og:image:height': '630',
       'og:image:type': 'image/png',
@@ -97,7 +98,7 @@ export default function Seo({ route }) {
       'twitter:card': 'summary_large_image',
       'twitter:title': conf.title,
       'twitter:description': conf.description,
-      'twitter:image': OG_IMAGE,
+      'twitter:image': ogImageFor(route),
     }
     for (const [k, v] of Object.entries(tw)) {
       let el = document.head.querySelector(`meta[name="${k}"]`)
@@ -115,7 +116,7 @@ export default function Seo({ route }) {
     const faqItems = route === 'home' || route === 'faq' ? FAQ_ITEMS : []
 
     document.head.querySelectorAll('script[data-seo-jsonld]').forEach((s) => s.remove())
-    schemasFor(route, faqItems).forEach((data) => {
+    schemasFor(route, faqItems, STEPS).forEach((data) => {
       const s = document.createElement('script')
       s.type = 'application/ld+json'
       s.dataset.seoJsonld = 'true'
