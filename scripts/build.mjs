@@ -23,7 +23,7 @@
 // head is identical to what the server shipped. That is what lets Vercel serve
 // the prerendered files directly instead of an SPA fallback.
 import { execSync } from 'node:child_process'
-import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { BRAND, SITE } from '../src/data/site.js'
@@ -245,7 +245,7 @@ try {
     throw new Error(`Expected 1 SSR bundle, found ${ssrFiles.length}: ${ssrFiles.join(', ')}`)
   }
   const { default: prerender } = await import(pathToFileURL(path.join(ssrDir, ssrFiles[0])).href)
-  const pages = prerender()
+  const pages = await prerender()
 
   // ---------------- 4) assemble full HTML documents ----------------
   const tpl = readFileSync(path.join(dist, 'index.html'), 'utf8')
@@ -263,7 +263,36 @@ try {
   const entryMatch = tpl.match(/<script type="module"[^>]*src="([^"]+\.js)"/)
   if (!entryMatch) throw new Error('Entry module script not found in built index.html')
   const entrySrc = entryMatch[1]
-  const moduleTag = `<link rel="modulepreload" crossorigin href="${entrySrc}">\n    <script type="module" crossorigin src="${entrySrc}"></script>`
+
+  // Preload every chunk the entry imports STATICALLY, not just the entry.
+  //
+  // Route components are lazy, and Rollup hoists anything shared between the
+  // entry and a lazy chunk into its own file - react and jsx-runtime, here.
+  // Those are needed on first paint, but the browser only discovers them after
+  // parsing the entry, so they arrive in a waterfall: two extra round trips on
+  // the critical path. On slow 4G that cost more than the splitting saved, and
+  // it showed up as LCP moving from about 1s to about 1.7s while the total
+  // bytes went down.
+  //
+  // The lazy route chunks are deliberately NOT preloaded - they are the whole
+  // point of the split.
+  const manifestPath = path.join(dist, '.vite', 'manifest.json')
+  let modulePreloads = [entrySrc]
+  if (existsSync(manifestPath)) {
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
+    const entry = Object.values(manifest).find((c) => c.isEntry)
+    for (const key of entry?.imports ?? []) {
+      const file = manifest[key]?.file
+      if (file) modulePreloads.push(`/${file}`)
+    }
+  } else {
+    console.warn('[build] no vite manifest - shared chunks will not be preloaded')
+  }
+  const moduleTag =
+    modulePreloads
+      .map((href) => `    <link rel="modulepreload" crossorigin href="${href}">`)
+      .join('\n') +
+    `\n    <script type="module" crossorigin src="${entrySrc}"></script>`
 
   const cssFiles = readdirSync(assetsDir).filter((f) => f.endsWith('.css'))
   if (cssFiles.length !== 1) {
@@ -312,6 +341,8 @@ try {
   log('crawl', 'wrote robots.txt, sitemap.xml, site.webmanifest')
 
   rmSync(path.join(assetsDir, cssFiles[0]))
+  // The manifest is a build input, not a deployable.
+  rmSync(path.join(dist, ".vite"), { recursive: true, force: true })
 
   log('done', `wrote ${wrote} prerendered HTML files (CSS inlined, ${cssFiles[0]} deleted)`)
 

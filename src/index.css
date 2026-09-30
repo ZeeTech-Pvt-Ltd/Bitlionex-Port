@@ -2386,41 +2386,21 @@ ol {
   margin-top: 10px;
 }
 
+/* The copyright is now the only thing on this line, so it centres rather than
+   sitting at the left of a space-between split that has nothing to put on the
+   right. */
 .footer__bottom {
   margin-top: 30px;
   padding-top: 22px;
   border-top: 1px solid var(--border);
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px 26px;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .footer__copy {
   font-size: 0.82rem;
   color: var(--muted);
-}
-
-/* Stacked, not a row. Each link keeps its own vertical padding, so the
-   column reads as a list rather than a run of text. */
-.footer__legal {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.footer__legal a {
-  display: inline-block;
-  padding: 7px 0;
-  font-size: 0.82rem;
-  color: var(--muted);
-  text-decoration: none;
-}
-
-.footer__legal a:hover {
-  color: var(--indigo-strong);
-  text-decoration: underline;
+  text-align: center;
 }
 
 /* -------------------------------------------------------------------------

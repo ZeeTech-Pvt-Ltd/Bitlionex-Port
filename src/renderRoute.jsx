@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react'
 import Seo from './components/Seo.jsx'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
@@ -16,13 +17,6 @@ import SectionHead from './components/SectionHead.jsx'
 import Register from './components/Register.jsx'
 import FinalCta from './components/FinalCta.jsx'
 
-import About from './components/About.jsx'
-import Contact from './components/Contact.jsx'
-import FaqPage from './components/FaqPage.jsx'
-import LegalPage from './components/LegalPage.jsx'
-import ThankYou from './components/ThankYou.jsx'
-import NotFound from './components/NotFound.jsx'
-
 import { FAQ, FAQ_ITEMS, FAQ_TEASER_COUNT } from './data/content.js'
 
 // =========================================================
@@ -30,8 +24,7 @@ import { FAQ, FAQ_ITEMS, FAQ_TEASER_COUNT } from './data/content.js'
 // =========================================================
 // This file is the single source of truth for what a route renders. It is
 // used twice: by the client, where App.jsx picks the route and renders this,
-// and by the build, where scripts/prerender-entry.jsx runs renderToString over
-// the same tree.
+// and by the build, where scripts/prerender-entry.jsx renders the same tree.
 //
 // Keeping the two identical is what lets the baked HTML hydrate without a
 // mismatch. If they ever diverge, every page load starts by React throwing
@@ -40,7 +33,30 @@ import { FAQ, FAQ_ITEMS, FAQ_TEASER_COUNT } from './data/content.js'
 // Anything that reads the DOM or a browser API during render breaks that
 // contract, because the prerender runs in Node. Route dependent state belongs
 // in an effect.
+//
+// WHY THE INNER PAGES ARE lazy()
+// ---------------------------------
+// They used to be static imports, so the homepage bundle carried the contact
+// form, the About page, the FAQ page, the 404, the confirmation page, and the
+// whole 30 KB of legal documents - none of which run on the homepage. Its
+// coverage report showed a fifth of the bundle never executing, and PageSpeed
+// flagged 41 KB of it as unused JavaScript.
+//
+// The homepage stays eager: it is the entry point for most traffic, and its
+// sections are all used there, so splitting it would buy nothing and cost a
+// round trip.
+//
+// Suspense wraps each route's content inside the layout rather than around it,
+// so the header, footer and provider stay mounted through a lazy load and only
+// the middle of the page is ever waiting.
 // =========================================================
+
+const About = lazy(() => import('./components/About.jsx'))
+const Contact = lazy(() => import('./components/Contact.jsx'))
+const FaqPage = lazy(() => import('./components/FaqPage.jsx'))
+const LegalPage = lazy(() => import('./components/LegalPage.jsx'))
+const ThankYou = lazy(() => import('./components/ThankYou.jsx'))
+const NotFound = lazy(() => import('./components/NotFound.jsx'))
 
 const Layout = ({ routeName, children }) => (
   <LegalProvider>
@@ -49,7 +65,9 @@ const Layout = ({ routeName, children }) => (
       Skip to content
     </a>
     <Header route={routeName} />
-    <main id="main">{children}</main>
+    <main id="main">
+      <Suspense fallback={null}>{children}</Suspense>
+    </main>
     <Footer />
   </LegalProvider>
 )

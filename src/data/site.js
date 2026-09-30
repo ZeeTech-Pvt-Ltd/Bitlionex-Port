@@ -31,3 +31,12 @@ export const FORM_STORAGE_KEY = 'bitlionex-port-form'
 // both state it and a mismatch between them is a legal problem rather than a
 // copy problem.
 export const MIN_AGE = 18
+
+// The date the legal documents were last reviewed.
+//
+// It lives here rather than in legal.js because seo.js needs the ISO form for
+// the sitemap, and importing it from legal.js pulled that whole 30 KB file into
+// the main bundle - which stopped the legal documents from code-splitting and
+// undid the point of lazy-loading the routes.
+export const LEGAL_LAST_REVIEWED = '25 September 2026'
+export const LEGAL_LAST_REVIEWED_ISO = '2026-09-25'

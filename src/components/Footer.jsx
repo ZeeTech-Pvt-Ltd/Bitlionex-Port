@@ -53,11 +53,6 @@ export default function Footer() {
 
         <div className="footer__bottom">
           <p className="footer__copy">{FOOTER.copyright}</p>
-          <div className="footer__legal">
-            <a href="/terms">Terms And Conditions</a>
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/risk-disclosure">Risk Disclosure</a>
-          </div>
         </div>
       </div>
     </footer>

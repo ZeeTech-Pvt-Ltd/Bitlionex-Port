@@ -46,7 +46,7 @@ export const INDEXABLE = ['home', 'about', 'contact', 'faq', 'terms', 'privacy',
    set by hand when a page's content actually changes, so the value in the
    sitemap is a claim someone made rather than a side effect of the build.
    ------------------------------------------------------------------------- */
-import { LEGAL_LAST_REVIEWED_ISO } from './legal.js'
+import { LEGAL_LAST_REVIEWED_ISO } from './site.js'
 
 export const CONTENT_UPDATED = '2026-09-29'
 

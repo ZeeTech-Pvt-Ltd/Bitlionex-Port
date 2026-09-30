@@ -16,18 +16,12 @@
 // date, so a deploy does not silently claim the terms were updated.
 // =========================================================
 
-// Displayed to a reader, so it is written the way a person reads a date.
-export const LEGAL_LAST_REVIEWED = '25 September 2026'
-
-// The same date in the only form a sitemap accepts. Kept beside the display
-// string so the two are edited together - reusing the one above directly put
-// "25 September 2026" into <lastmod>, which is not a W3C datetime and can cost
-// the whole entry.
-export const LEGAL_LAST_REVIEWED_ISO = '2026-09-25'
 
 /* -------------------------------------------------------------------------
    Terms and Conditions
    ------------------------------------------------------------------------- */
+
+import { LEGAL_LAST_REVIEWED } from './site.js'
 
 const terms = {
   id: 'terms',

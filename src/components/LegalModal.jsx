@@ -1,7 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { Close } from './icons.jsx'
 import RichText from './RichText.jsx'
-import { LEGAL_DOCS } from '../data/legal.js'
 
 /**
  * Legal documents, opened in place.
@@ -24,6 +23,12 @@ export function useLegal() {
 
 export function LegalProvider({ children }) {
   const [openDoc, setOpenDoc] = useState(null) // 'terms' | 'privacy' | 'risk' | null
+  // The documents are fetched the first time one is opened, not imported.
+  // They are about 30 KB of prose, they are already in the prerendered HTML of
+  // the three legal routes, and a visitor who never opens the modal should
+  // never download them. As a static import this file sits in the layout, so
+  // it was pulling them into every page on the site.
+  const [docs, setDocs] = useState(null)
   const closeRef = useRef(null)
   // Whatever had focus when the modal opened, so it can be handed back.
   const returnFocusRef = useRef(null)
@@ -80,7 +85,18 @@ export function LegalProvider({ children }) {
     }
   }, [openDoc, closeLegal])
 
-  const doc = openDoc ? LEGAL_DOCS[openDoc] : null
+  useEffect(() => {
+    if (!openDoc || docs) return undefined
+    let cancelled = false
+    import('../data/legal.js').then((m) => {
+      if (!cancelled) setDocs(m.LEGAL_DOCS)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [openDoc, docs])
+
+  const doc = openDoc && docs ? docs[openDoc] : null
 
   return (
     <LegalContext.Provider value={{ openLegal, closeLegal, openDoc }}>
