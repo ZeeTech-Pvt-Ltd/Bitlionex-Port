@@ -35,19 +35,15 @@ const terms = {
   title: 'Terms And Conditions',
   updated: LEGAL_LAST_REVIEWED,
   intro:
-    'These terms govern your use of the Bitlionex Port website and research service. By using the site or opening an account, you agree to them. If you do not agree, please do not use the service.',
+    'These terms govern your use of the Bitlionex Port website and research service. They form a binding agreement between you and the operator of this website. By using the site or opening an account, you agree to them. If you do not agree with any part of them, please stop using the site.',
   sections: [
     {
-      id: 'who-we-are',
-      heading: '1. Who We Are',
-      // The registered entity name, its type, its ACN or ABN and its address
-      // were placeholders here and were removed at the operator's request on
-      // 2026-09-28, because none of those values are set. What is left does
-      // the one job this section has to do - say who "we" is - without
-      // pretending to a registration that does not exist yet.
+      id: 'general',
+      heading: '1. General',
       paras: [
-        'Bitlionex Port is a research and portfolio tracking service. Throughout these terms, we and us mean the operator of this website.',
-        'You can contact us about anything in these terms at support@bitlionexport-au.com.',
+        'Welcome to Bitlionex Port. You can reach us about anything in these terms at support@bitlionexport-au.com.',
+        'These terms, together with our Privacy Policy, set out the whole agreement between you and us. By using the website you confirm you accept both, and you consent to how the Privacy Policy says your information is handled. The Privacy Policy is available on this site and forms part of these terms.',
+        'We describe what this service is, and what it is not, in section 2. Please read that section before you rely on anything the site publishes.',
       ],
     },
     {
@@ -55,7 +51,8 @@ const terms = {
       heading: '2. What This Service Is',
       paras: [
         'Bitlionex Port is a research and portfolio tracking service. It gathers market data, scores assets against a published set of measures, and presents the result so you can make your own decisions.',
-        'We are not a broker, a market maker, an exchange, a custodian, or a licensed financial adviser. We do not execute trades on your behalf and we never take custody of your assets.',
+        'The site may also describe or link to third party platforms that provide trading or related services. We do not operate those platforms, we do not place trades on your behalf through them or anywhere else, and we never take custody of your assets.',
+        'We are not a broker, a market maker, an exchange, a custodian, or a licensed financial adviser.',
         'Nothing on this site or in the service is personal financial advice. It does not consider your objectives, financial situation or needs. Before acting on anything you read here, consider whether it suits your circumstances, and seek advice from a licensed adviser if you need it.',
       ],
     },
@@ -63,14 +60,23 @@ const terms = {
       id: 'eligibility',
       heading: '3. Who Can Use It',
       paras: [
-        'You may use this service if you are at least 18 years old and you are not barred from using it under the laws that apply to you.',
+        'You may use this service only if all of the following are true. You are at least 18 years old. You have the legal capacity to enter into these terms and to comply with them. You are not barred from using the site or the service under the laws of the place where you live or from which you are accessing it.',
         'The service is built for Australian residents. If you use it from somewhere else, you are responsible for making sure you are allowed to, and for any tax or reporting obligations that follow.',
         'If you open an account on behalf of a company or trust, you confirm you are authorised to bind that entity to these terms.',
+        'We make no promise, express or implied, about whether the site or the service is lawful for you to use where you are, or about how you may use it. We are not liable for any use of the site that breaks your local law.',
+      ],
+    },
+    {
+      id: 'restricted-territories',
+      heading: '4. Restricted Territories',
+      paras: [
+        'We may, at our discretion, limit or refuse access to the site or the service, in whole or in part, for anyone in a particular place, and for anyone we reasonably consider may present a legal, regulatory, reputational or commercial risk.',
+        'We may also set additional conditions before accepting users who live in or are accessing from certain countries. If you travel to a place where the service is restricted, parts of it may be unavailable to you while you are there.',
       ],
     },
     {
       id: 'your-account',
-      heading: '4. Your Account',
+      heading: '5. Your Account',
       paras: [
         'You agree to give accurate information when you register and to keep it up to date.',
         'You are responsible for anything done through your account. Tell us straight away if you think someone else has access to it.',
@@ -84,7 +90,7 @@ const terms = {
     },
     {
       id: 'fees',
-      heading: '5. Fees',
+      heading: '6. Fees',
       paras: [
         'Opening an account costs nothing. Where a fee applies to any part of the service, it is shown in full before you are asked to pay it, and you are never charged without being told first.',
         'Any funding level or minimum balance is set by the platform and confirmed to you in writing before anything is transferred.',
@@ -92,7 +98,7 @@ const terms = {
     },
     {
       id: 'research-not-advice',
-      heading: '6. Research Is Not Advice',
+      heading: '7. Research Is Not Advice',
       paras: [
         'What we publish is general information about market data. It is not personal financial advice, it is not a recommendation, and it does not take account of your objectives, financial situation or needs.',
         'Our scores and commentary describe what the data showed at a point in time. They are not predictions, guarantees or recommendations.',
@@ -101,44 +107,102 @@ const terms = {
       ],
     },
     {
-      id: 'third-party-data',
-      heading: '7. Third Party Data',
+      id: 'prohibited',
+      heading: '8. Prohibited Activities',
       paras: [
-        'We rely on market data from third party sources. We do not control those sources and cannot guarantee that the data is accurate, complete or available at any given moment.',
-        'Where data is thin or missing, we aim to show that rather than fill the gap. Even so, you should not treat our figures as the final word on any asset.',
+        'You agree to use the site and the service lawfully, and not to do any of the following.',
+      ],
+      list: [
+        'Post, upload, publish or send anything that infringes someone else’s rights, including intellectual property or privacy rights.',
+        'Post, upload, publish or send anything unlawful, threatening, harmful, offensive, defamatory, racist or otherwise inappropriate.',
+        'Introduce viruses or any other software that could damage our systems or anyone else’s, or that interferes with another person’s use of the site.',
+        'Post or send advertising of any kind without our written consent.',
+        'Remove or alter any legal notice, attribution or proprietary mark on the site.',
+        'Reach the service through any interface other than this website.',
+        'Interfere with anyone else’s use of the site or the service.',
+        'Use bots or automated systems to interact with the site or the service.',
+        'Introduce any passive or active information collection mechanism, including web bugs, cookies or similar tracking devices, without our written consent.',
+        'Frame, mirror or otherwise reproduce the appearance or functionality of the service.',
+        'Break any law, or encourage or help anyone else to, including copyright or trademark infringement, defamation, invasion of privacy, identity theft, hacking, cracking or distributing counterfeit software.',
+        'Alter or interfere with the source code of the site, or upload anything that could harm the site or a third party.',
+        'Disassemble, decompile or reverse engineer any software or technology in the site or used to provide the service.',
       ],
     },
     {
-      id: 'availability',
-      heading: '8. Availability',
+      id: 'enforcement',
+      heading: '9. Monitoring And Enforcement',
       paras: [
-        'We aim to keep the service running, but we do not promise it will always be available or free of faults. We may change, pause or withdraw any part of it.',
-        'We may update these terms. When we do, the change appears on this page and the version you are reading is the current one. Continuing to use the service after a change means you accept the updated terms.',
+        'If we believe your use of the site or the service does not follow these terms or the law, we may monitor that use.',
+        'We may also restrict your access, share information about how you have used the site with third parties, and take any other step we consider necessary to protect our rights and those of third parties.',
+        'This is in addition to any other rights we have, and does not replace them.',
       ],
     },
     {
-      id: 'liability',
-      heading: '9. Limits Of Our Liability',
+      id: 'third-party',
+      heading: '10. Third Party Content',
       paras: [
-        'Nothing in these terms excludes any right you have under the Australian Consumer Law that cannot lawfully be excluded.',
-        'Subject to that, we are not liable for any loss of profit, loss of opportunity, or indirect or consequential loss arising from your use of the service, or from any decision you make after reading our research.',
-        'To the extent the law allows, our total liability to you is limited to the amount you have paid us in the twelve months before the claim.',
+        'While using the service you may encounter content or services from third parties. That includes descriptions of, or links to, platforms that provide trading or related services, along with advertising and reviews.',
+        'We do not control that content and we do not endorse it. It may not be accurate or up to date, and the third party may change it without telling us.',
+        'Check anything you read before you rely on it. Any decision you make or action you take because of third party content is your responsibility alone.',
+      ],
+    },
+    {
+      id: 'links',
+      heading: '11. Links',
+      paras: [
+        'The site may contain links, content, advertisements, promotions, logos and other material pointing to websites or software we do not operate. Those are the Links.',
+        'There is a risk in using anything you reach through a Link. Read the terms and policies of the third party before interacting with it, and before you retrieve, use, rely on or buy anything from it.',
+        'A Link on this site does not mean we endorse, authorise, sponsor, are affiliated with, or are connected to that site, that software, or whoever runs it.',
+        'We have not reviewed everything the Links lead to and we are not responsible for it. You agree not to hold us liable for any loss or damage caused by relying on or using content, goods or services found through a Link.',
       ],
     },
     {
       id: 'intellectual-property',
-      heading: '10. Our Content',
+      heading: '12. Our Content',
       paras: [
-        'The site, the research, the scoring method and the design are ours or licensed to us. You may read and use them for your own personal purposes.',
-        'You may not copy, republish, sell or redistribute our research without our written permission.',
+        'The whole of this site, including its text, images, video, logos, design, sound and marks, is protected by intellectual property rights owned by us or by third parties. We hold all rights, title and interest in the site and the service.',
+        'Using the site or the service does not transfer any intellectual property rights to you. The only right you have is the right to use them as these terms describe, which is personal and non commercial.',
+        'You may not modify, decompile, disassemble, reverse engineer, copy, transfer, make derivative works from, rent, sublicense, distribute, reproduce, republish, scrape, download, display, transmit, post, lease or sell any part of the site without our written consent. That includes any use that falls outside these terms.',
       ],
     },
     {
-      id: 'law',
-      heading: '11. Which Law Applies',
+      id: 'availability',
+      heading: '13. Availability',
       paras: [
-        'These terms are governed by the laws of [PLACEHOLDER: state or territory], Australia. You and we both submit to the courts of that place.',
-        'If any part of these terms turns out to be unenforceable, the rest of them still apply.',
+        'We aim to keep the service running, but we do not promise it will always be available or free of faults. We may change, pause or withdraw any part of it.',
+        'We may update these terms. When we do, we change the reviewed date at the top of this page and the current version is the one you are reading. Continuing to use the service after a change means you accept the updated terms.',
+      ],
+    },
+    {
+      id: 'liability',
+      heading: '14. Limits Of Our Liability',
+      paras: [
+        'You use the site and the service at your own risk. To the extent the law allows, we disclaim every warranty, express or implied, about the site, the service and your use of them. That includes any implied warranty of merchantability, title, fitness for a particular purpose, non infringement, usefulness, authority, accuracy, completeness or timeliness. The service and everything on it is provided as is, as available, and with all faults.',
+        'We are not responsible for any error, mistake or inaccuracy in the content on the site.',
+        'We are not responsible for any interruption or failure of transmission to or from the site.',
+        'We are not responsible for any bug, virus, trojan or similar problem transmitted to or through the site or the service by a third party.',
+        'We are not responsible for any fault in telephone or network lines, online systems, servers or providers, hardware or software.',
+        'We are not responsible for any failure caused by technical problems or internet congestion.',
+        'We are not responsible for any incompatibility between the site or the service and your browser or other equipment. We accept no responsibility or risk for your internet use.',
+        'You agree to indemnify us for any loss you or anyone else suffers in connection with the site or the service, and you take full responsibility for any decision you make based on the content of the site or the service.',
+        'To the extent the law allows, we are not liable for any special, direct, indirect, incidental, punitive or consequential loss, including loss of profit or data.',
+        'That covers loss arising from your use of the site or the service, and from anything accessed or downloaded through them.',
+        'It applies whether the claim is based on warranty, contract, tort or any other legal theory, and whether or not we were told the loss was possible.',
+        'If a court holds us liable, our total liability will not exceed 100 AUD.',
+        'Nothing in these terms excludes any right you have under the Australian Consumer Law that cannot lawfully be excluded. Where our liability cannot be excluded but can be limited, it is limited to the amount you have paid us in the twelve months before the claim, or 100 AUD, whichever is greater.',
+      ],
+    },
+    {
+      id: 'miscellaneous',
+      heading: '15. General',
+      paras: [
+        'We may modify, amend or discontinue any part of the service, or add new services, at any time. We are not liable for any loss you suffer because of a change, and you have no claim against us for it.',
+        'We may update these terms from time to time. When we do, we publish the current version and change the reviewed date at the top of this page. A change takes effect when it is published, and continuing to use the site after that means you accept it.',
+        'Sending information to or from the site does not create any relationship between us beyond what these terms describe.',
+        'These terms and the Privacy Policy, as each is updated from time to time, are the whole agreement between us. No other statement, promise, consent or undertaking, whether written or spoken, is binding on either of us.',
+        'If we do not enforce a right, power or remedy straight away, that is not a waiver of it. Enforcing one partly does not stop us enforcing it or anything else later.',
+        'If a court with proper jurisdiction finds any part of these terms unenforceable, that part is removed. The rest stays valid and enforceable as though it had never been included, and where the law allows the remaining terms are read so as to best reflect what the removed part was intended to achieve.',
+        'We may transfer or assign our rights and obligations under these terms to a third party, and the site or any part of the service may be run by third parties. You may not transfer, assign or pledge any of your rights or obligations under these terms.',
       ],
     },
   ],
@@ -359,7 +423,6 @@ const risk = {
       heading: '9. If Crypto Is Affecting You',
       paras: [
         'If you are betting more than you planned, chasing losses, or losing sleep over your positions, stop and talk to someone. That is a much better outcome than another deposit.',
-        'Free and confidential support is available in Australia from Lifeline on 13 11 14, and from the National Debt Helpline on 1800 007 007 for financial stress.',
       ],
     },
   ],

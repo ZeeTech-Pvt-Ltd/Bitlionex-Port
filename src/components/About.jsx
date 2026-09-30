@@ -93,12 +93,7 @@ export default function About() {
               <a className="btn btn--on-deep" href={ABOUT.cta.primaryHref}>
                 {ABOUT.cta.primaryCta}
               </a>
-              <a
-                className="btn btn--ghost"
-                href={ABOUT.cta.secondaryHref}
-                data-scroll="#register"
-                style={{ color: '#fff', borderColor: 'rgba(255, 255, 255, 0.45)' }}
-              >
+              <a className="btn btn--on-deep-ghost" href={ABOUT.cta.secondaryHref} data-scroll="#register">
                 {ABOUT.cta.secondaryCta}
               </a>
             </div>

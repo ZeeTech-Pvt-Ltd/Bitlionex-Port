@@ -22,11 +22,7 @@ export default function FinalCta() {
             <a className="btn btn--on-deep" href="#register" data-scroll="#register">
               {FINAL_CTA.primaryCta}
             </a>
-            <a
-              className="btn btn--ghost"
-              href={FINAL_CTA.secondaryHref}
-              style={{ color: '#fff', borderColor: 'rgba(255,255,255,0.45)' }}
-            >
+            <a className="btn btn--on-deep-ghost" href={FINAL_CTA.secondaryHref}>
               {FINAL_CTA.secondaryCta}
             </a>
           </div>

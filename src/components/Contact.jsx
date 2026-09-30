@@ -3,7 +3,6 @@ import Reveal from './Reveal.jsx'
 import RegistrationForm from './RegistrationForm.jsx'
 import { CONTACT } from '../data/content.js'
 import { MapPin, Shield } from './icons.jsx'
-import { SITE } from '../data/site.js'
 
 /**
  * Contact page.
@@ -75,10 +74,6 @@ export default function Contact() {
                     will ever ask for your wallet seed phrase, exchange password or card details. If
                     someone does, they are not us.
                   </span>
-                </p>
-                <p style={{ fontSize: '0.82rem', color: 'var(--muted)' }}>
-                  Written enquiries go to the address published in the Privacy Policy. This site is
-                  served from {SITE.replace('https://', '')}.
                 </p>
               </div>
             </Reveal>
