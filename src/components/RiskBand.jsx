@@ -57,8 +57,12 @@ export default function RiskBand() {
             <img
               className="section-figure"
               src="/market-app.webp"
+              srcSet="/market-app-400.webp 400w, /market-app-800.webp 800w, /market-app.webp 1000w"
+              sizes="(max-width: 560px) calc(100vw - 40px), 520px"
               width="1000"
               height="1000"
+              loading="lazy"
+              decoding="async"
               alt="An illustration of a market app on a phone, with cards representing a currency pair and a market index."
             />
           </Reveal>

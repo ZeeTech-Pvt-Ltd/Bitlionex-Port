@@ -43,8 +43,12 @@ export default function WhatIs() {
             <img
               className="section-figure"
               src="/portfolio-app.webp"
+              srcSet="/portfolio-app-400.webp 400w, /portfolio-app-800.webp 800w, /portfolio-app.webp 1000w"
+              sizes="(max-width: 560px) calc(100vw - 40px), 520px"
               width="1000"
               height="1000"
+              loading="lazy"
+              decoding="async"
               alt="A phone showing a portfolio app, with cards representing markets and holdings."
             />
           </Reveal>

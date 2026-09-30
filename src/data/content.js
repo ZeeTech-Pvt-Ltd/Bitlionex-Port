@@ -231,6 +231,8 @@ export const ABOUT = {
       // Content on the left, image on the right.
       image: {
         src: '/about-1.webp',
+        srcSet:
+          '/about-1-400.webp 400w, /about-1-800.webp 800w, /about-1.webp 900w',
         side: 'right',
         alt: 'An illustration of a person at a laptop with an earnings card floating beside them.',
       },
@@ -246,6 +248,8 @@ export const ABOUT = {
       // Image on the left, content on the right.
       image: {
         src: '/about-2.webp',
+        srcSet:
+          '/about-2-400.webp 400w, /about-2-800.webp 800w, /about-2.webp 900w',
         side: 'left',
         alt: 'An illustration of someone checking markets on a laptop and a phone, with a currency card beside them.',
       },
@@ -265,6 +269,8 @@ export const ABOUT = {
       // Content on the left, image on the right.
       image: {
         src: '/about-3.webp',
+        srcSet:
+          '/about-3-400.webp 400w, /about-3-800.webp 800w, /about-3.webp 900w',
         side: 'right',
         alt: 'An illustration of someone weighing up crypto markets, with one panel of ticks and one of crosses beside them.',
       },
@@ -280,6 +286,8 @@ export const ABOUT = {
       // it carries the fourth side: right, left, right, left.
       image: {
         src: '/about-4.webp',
+        srcSet:
+          '/about-4-400.webp 400w, /about-4-800.webp 800w, /about-4.webp 900w',
         side: 'left',
         alt: 'An illustration of someone considering four crossed-out roles: broker, exchange, fund manager and financial advice.',
       },

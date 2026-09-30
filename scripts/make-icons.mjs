@@ -85,13 +85,12 @@ await sharp(SRC)
   .png({ compressionLevel: 9 })
   .toFile(path.join(OUT, 'icon-maskable-512.png'))
 
-// The header and footer wordmark. Drawn at 36px on screen, so this is 3x -
-// enough headroom for every display density in use, and small enough that it
-// costs almost nothing.
-await square(108, 'logo-mark.png')
+// The header and footer wordmark is produced by make-content-images.mjs as
+// WebP. It used to be a PNG here, at 11 KB for a 36px slot; the same mark as
+// WebP is 3 KB and it appears on every page.
 
 console.log(
   '[icons] wrote favicon-32.png, favicon-16.png, apple-touch-icon.png,\n' +
-    '        icon-192.png, icon-512.png, icon-maskable-512.png, logo-mark.png\n' +
+    '        icon-192.png, icon-512.png, icon-maskable-512.png\n' +
     `        (from ${path.relative(ROOT, SRC)}, ${meta.width}x${meta.height})`,
 )

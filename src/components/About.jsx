@@ -59,8 +59,12 @@ export default function About() {
                     <img
                       className="section-figure section-figure--wide"
                       src={section.image.src}
+                      srcSet={section.image.srcSet}
+                      sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 939px) 90vw, 520px"
                       width="900"
                       height="675"
+                      loading="lazy"
+                      decoding="async"
                       alt={section.image.alt}
                     />
                   </div>

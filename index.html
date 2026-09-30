@@ -27,17 +27,40 @@
     <!-- Search Console ownership proof. -->
     <meta name="google-site-verification" content="YyVFUxLa1PAaG7913GQyzgz0fg0yfj4dxL6nJIf_vCk" />
 
-    <!-- Google Analytics. Both this and the inline script above are INLINE, so
-         production's Content-Security-Policy has to allow inline script or the
-         tag is blocked. See the script-src note in vercel.json - that directive
-         was missing entirely until 2026-09-29 and was silently blocking the
-         `js` class on <html> as well. -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FC2EL0H3VM"></script>
+    <!-- Google Analytics, loaded AFTER the page has finished loading.
+         PageSpeed measured the tag at 173 KB with 73 KB of it unused, and it
+         was competing for bandwidth with the font and the bundle on the
+         critical path - the LCP element is a paragraph of hero text, so the
+         font is what it is waiting for, and a 173 KB script ahead of it in the
+         queue is 173 KB the text does not get.
+
+         The bootstrap still runs inline and immediately, so dataLayer and
+         gtag() exist before anything can call them and the two queued commands
+         are replayed when the script arrives. Only the download moves. The
+         timeout is a backstop for the case where load never fires.
+
+         This script is inline, so production's Content-Security-Policy has to
+         allow inline script - see the script-src note in vercel.json, and note
+         that the same gap was silently blocking the `js` class on <html>. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-FC2EL0H3VM');
+      (function () {
+        var started = false;
+        function loadTag() {
+          if (started) return;
+          started = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-FC2EL0H3VM';
+          document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') loadTag();
+        else window.addEventListener('load', loadTag, { once: true });
+        setTimeout(loadTag, 4000);
+      })();
     </script>
 
     <!-- Primary metadata. Homepage defaults: scripts/build.mjs REPLACES

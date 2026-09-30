@@ -21,7 +21,11 @@ export default function Logo({ onDeep = false, compact = false }) {
       {/* alt is empty on purpose. The wordmark beside it already reads the
           name aloud, and the link wrapping this whole thing carries its own
           label - a third announcement is noise, not accessibility. */}
-      <img className="logo__mark" src="/logo-mark.png" width="36" height="36" alt="" />
+      {/* WebP, not the PNG. The mark is a flat two tone drawing, so WebP at the
+          same 108px is a third of the size - 3 KB against 11 KB, for an image
+          that is on every page of the site. */}
+      <img className="logo__mark" src="/logo-mark.webp" width="36" height="36" alt="" />
+
       <span className="logo__text">
         <span className="logo__name" style={onDeep ? { color: '#fff' } : undefined}>
           {BRAND_MARK}

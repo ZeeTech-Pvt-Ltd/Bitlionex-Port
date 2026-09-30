@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "node scripts/build.mjs",
-    "images": "node scripts/make-icons.mjs && node scripts/make-og.mjs",
+    "images": "node scripts/make-icons.mjs && node scripts/make-content-images.mjs && node scripts/make-og.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
