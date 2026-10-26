@@ -3,9 +3,13 @@
 AI assisted crypto research and portfolio tracking for Australian investors.
 Marketing site for **bitlionexport-au.com**.
 
-React 19 + Vite. No component library, no CSS framework, no runtime
-dependencies beyond React. Every page is prerendered to static HTML at build
-time and hydrated on load.
+React 19 + **Next.js App Router** with `output: 'export'`. No component
+library, no CSS framework, no runtime dependencies beyond React. Every route is
+prerendered to static HTML at build time.
+
+The site was Vite until 2026-10-26 and was migrated to Next on the operator's
+instruction, matching the sibling `Ceravindo-Platform`. The hand-rolled
+`scripts/build.mjs` prerender is gone: Next does that work now.
 
 ---
 
@@ -13,23 +17,23 @@ time and hydrated on load.
 
 ```bash
 npm install
-npm run dev        # dev server, http://localhost:5173
-npm run build      # production build into dist/
-npm run preview    # vite's preview server (SPA fallback - see the note below)
-npm run images     # regenerate every icon and the social card from the master artwork
+npm run dev        # dev server, http://localhost:3000
+npm run build      # static export into out/
+npm run images     # regenerate every icon, content image and social card
+npm run crawl      # regenerate robots.txt, sitemap.xml and site.webmanifest
 ```
 
-`npm run preview` is fine for a glance, but it applies an SPA history fallback,
-so every unknown path returns the homepage at HTTP 200. That is precisely the
-soft 404 this build avoids. To look at the built site the way Vercel serves it,
-use the harness server instead:
+`next start` does not work with `output: 'export'` - there is no server to
+start. To look at the built site the way Vercel serves it, use the harness
+server:
 
 ```bash
-node .arttmp/serve-dist.mjs 4191
+node .arttmp/serve-out.mjs 4191
 ```
 
-It serves the prerendered route files and returns `dist/404.html` with a real
-404 status for anything unknown.
+Next writes one flat file per route (`out/about.html`, not
+`out/about/index.html`), so that server resolves `/about` to `about.html` and
+returns `out/404.html` with a real 404 status for anything unknown.
 
 ---
 
@@ -40,11 +44,11 @@ npm run build
 node .arttmp/run-all.mjs
 ```
 
-**784 assertions across 9 suites.** All of them pass on a clean build.
+**807 assertions across 9 suites.** All of them pass on a clean build.
 
 | Suite | What it catches |
 |---|---|
-| `verify-ssg` | Empty `#root`, a route rendering the wrong tree, CSS not inlined, a noindex page shipping a canonical, invented figures, structured data describing content that is not on the page, any image that nothing references |
+| `verify-ssg` | A route that renders no visible text, a noindex page shipping a canonical, a canonical that disagrees with the sitemap, a stylesheet that is not emitted or not linked, the reveal animation not gated on scripting, invented figures, structured data describing content that is not on the page, any image that nothing references |
 | `verify-copy` | Em dashes, banned marketing words, headings not in Title Case, runaway sentences, inconsistent brand spelling |
 | `verify-seo` | Per-route metadata, description length and call to action, heading hierarchy, robots, sitemap |
 | `verify-links` | Every href, asset and in-page anchor resolving |
@@ -64,6 +68,12 @@ actually need to.
 ## Layout
 
 ```
+app/
+  layout.jsx    fonts, metadata, header/footer, analytics, the providers
+  page.jsx      the homepage, in the section order below
+  <route>/page.jsx   one file per route
+  not-found.jsx
+  globals.css   the whole design system
 src/
   data/         all copy and content - nothing user-facing lives in a component
     site.js       brand constants, the relay endpoint, offerName
@@ -73,33 +83,54 @@ src/
     seo.js        per-route metadata and structured data
     countries.js  the phone picker's country table
   lib/
+    metadata.js     maps seo.js onto Next's Metadata API
     useLeadForm.js  form state, validation, submission (shared by home + contact)
     submitLead.js   the wire format, in one place
     phoneFormat.js  masks, E.164, trunk-prefix handling
   components/   one file per section or page
-  index.css     the whole design system
+  fonts/        the two self-hosted subsets, loaded by next/font/local
 scripts/
-  build.mjs     client build, SSR build, prerender, robots/sitemap/manifest
-  make-og.mjs   the social card and icons
+  make-icons.mjs           favicons and app icons
+  make-content-images.mjs  responsive content images at 400 and 800
+  make-og.mjs              one social card per route
+  make-crawl-files.mjs     robots.txt, sitemap.xml, site.webmanifest
 ```
 
-### Why `scripts/build.mjs` is not just `vite build`
+### How the prerender works now
 
-Vite alone produces a single `index.html` and a JS bundle. This build does four
-more things:
+There is no build script to reason about. `next build` with
+`output: 'export'` renders every route to HTML in `out/`, and `trailingSlash:
+false` writes `about.html` rather than `about/index.html` so the file name
+matches the canonical URL.
 
-1. Builds an SSR bundle of `scripts/prerender-entry.jsx`.
-2. Renders every route through `renderRoute()` to static markup.
-3. Writes each route's own HTML file with its head baked in and the CSS
-   inlined, so there is no render-blocking stylesheet request.
-4. Generates `robots.txt`, `sitemap.xml` and `site.webmanifest` **from the same
-   `seo.js` table the pages come from**, so the sitemap can never list a route
-   that does not exist or leak `/thank-you` into the index.
+Three things deliberately sit outside that:
 
-`renderRoute.jsx` is used by both the client and the prerender. Keeping the two
-identical is what lets the baked HTML hydrate without a mismatch. Anything that
-reads the DOM during render breaks that contract, because the prerender runs in
-Node.
+1. **`robots.txt`, `sitemap.xml` and `site.webmanifest`** are generated by
+   `npm run crawl` from the same `seo.js` table the pages come from, so the
+   sitemap cannot list a route that does not exist or leak `/thank-you` into
+   the index. They are written into `public/` and copied into `out/` by the
+   build.
+2. **The social cards and icons** come from `npm run images`, not from the
+   build, so a machine without a rasteriser can still ship the site.
+3. **Redirects** live in `vercel.json`, because `redirects()` is unsupported
+   with `output: 'export'`.
+
+### Server and client components
+
+The route components are server components; only the parts that need state or
+browser APIs carry `'use client'` - the header, the form, the phone picker, the
+FAQ accordion, the legal modal, the charts and the confirmation page.
+
+Two consequences worth knowing before editing:
+
+- **A server component cannot pass a function to a client component.** Hero
+  passes a `formatValue` formatter into the chart, so `HeroVisual` is a client
+  component too. If a new chart needs a formatter, do the same rather than
+  passing the function across the boundary.
+- **The reveal animation keys off `@media (scripting: enabled)`**, not off a
+  class added by an inline script. Next prerenders the document, so an inline
+  class would be present in the served HTML and absent on the client's first
+  render - a hydration mismatch. The media query is answered by the browser.
 
 ---
 

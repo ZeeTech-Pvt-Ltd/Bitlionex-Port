@@ -8,9 +8,15 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+# Vite build output (the site moved to Next on 2026-10-26)
 dist
 dist-ssr
 .ssr-dist
+
+# Next build output
+.next
+out
+next-env.d.ts
 *.local
 
 # Temp verification scripts / scratch

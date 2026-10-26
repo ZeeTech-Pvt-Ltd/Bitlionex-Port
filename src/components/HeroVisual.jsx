@@ -1,3 +1,5 @@
+'use client'
+
 import { LineChart } from './charts.jsx'
 import { HERO_SERIES, HERO_TILES, formatAud } from '../data/market.js'
 import { ArrowRight } from './icons.jsx'

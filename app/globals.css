@@ -37,32 +37,15 @@
    ========================================================================= */
 
 /* -------------------------------------------------------------------------
-   Fonts - self-hosted latin subsets, so no font service sees a visitor's
-   request. That is what lets the privacy policy say the fonts are served from
-   this domain.
+   Fonts are declared by next/font/local in app/layout.jsx, which generates the
+   face rules and the preloads from the same two files in src/fonts. They are
+   still self-hosted, so no font service sees a visitor's request - do not
+   switch them to next/font/google.
 
-   Note it does NOT mean the page makes no third party request: Google
-   Analytics is loaded from googletagmanager.com and reports to Google, and it
-   has been since 2026-09-29. The policy discloses that in section 3. This
-   comment said "no third-party request at runtime" until then, which stopped
-   being true the moment the tag went in.
+   Note that self-hosted does NOT mean the page makes no third party request:
+   Google Analytics loads from googletagmanager.com and reports to Google. The
+   privacy policy discloses that in section 3.
    ------------------------------------------------------------------------- */
-
-@font-face {
-  font-family: 'Instrument Sans';
-  src: url('/fonts/instrument-sans.woff2') format('woff2');
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/inter.woff2') format('woff2');
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* -------------------------------------------------------------------------
    Tokens
@@ -107,8 +90,8 @@
   --field-line: #8a8aa4; /* 3.15:1 - real control boundary */
 
   /* Type */
-  --font-display: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   /* Shape */
   --r-sm: 8px;
@@ -2468,26 +2451,41 @@ ol {
 /* -------------------------------------------------------------------------
    Reveal on scroll
    -------------------------------------------------------------------------
-   Gated on the `js` class that index.html adds inline, so a browser without
-   JS (and the prerendered HTML in a crawler) keeps every section visible.
+   Visible by default, so the prerendered HTML paints for a crawler and for a
+   visitor without JS. The animation only applies where scripting is available
+   to set data-revealed.
+
+   This used to key off a `js` class added to <html> by an inline script. Next
+   renders the document at build time, so that class would be present in the
+   served HTML and absent on the client's first render, which is a hydration
+   mismatch. The media query is answered by the browser rather than by an
+   attribute, so there is nothing to mismatch. It also survives a
+   Content-Security-Policy that blocks inline script, which is what the old
+   approach needed.
    ------------------------------------------------------------------------- */
 
-html.js .reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-html.js .reveal[data-revealed='true'] {
+.reveal {
   opacity: 1;
-  transform: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html.js .reveal {
+@media (scripting: enabled) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal[data-revealed='true'] {
     opacity: 1;
     transform: none;
-    transition: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 }
 

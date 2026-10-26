@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { countries } from '../data/countries.js'
 import { getCountry } from '../lib/phoneFormat.js'

@@ -66,7 +66,11 @@ export const seo = {
     keywords:
       'Bitlionex Port, AI crypto research Australia, crypto portfolio tracker Australia, bitcoin portfolio Australia, crypto research platform',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1',
-    canonical: `${SITE}/`,
+    // No trailing slash, matching trailingSlash: false in next.config.mjs.
+    // Next normalises a canonical of `${SITE}/` down to `${SITE}` anyway, so
+    // writing it without the slash here is what keeps the canonical, the
+    // sitemap entry and the URL the server actually serves all identical.
+    canonical: SITE,
     card: {
       line1: 'Your crypto holdings,',
       line2: 'in one clear picture.',
@@ -266,7 +270,7 @@ export function webpageSchema(route) {
     '@type': 'WebPage',
     name: conf.title,
     description: conf.description,
-    url: conf.canonical || `${SITE}/`,
+    url: conf.canonical || SITE,
     inLanguage: 'en-AU',
     isPartOf: { '@type': 'WebSite', name: BRAND, url: `${SITE}/` },
   }

@@ -1,3 +1,5 @@
+'use client'
+
 import { useLeadForm } from '../lib/useLeadForm.js'
 import PhoneField from './PhoneField.jsx'
 import { useLegal } from './LegalModal.jsx'

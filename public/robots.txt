@@ -1,0 +1,10 @@
+# Bitlionex Port
+# https://bitlionexport-au.com
+
+User-agent: *
+Allow: /
+
+# /thank-you is intentionally NOT disallowed. It carries a noindex tag, and a
+# crawler that is blocked here never gets to read it.
+
+Sitemap: https://bitlionexport-au.com/sitemap.xml

@@ -1,0 +1,30 @@
+{
+  "name": "Bitlionex Port",
+  "short_name": "Bitlionex",
+  "description": "AI assisted crypto research and portfolio tracking for Australian investors.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f7fc",
+  "theme_color": "#322e80",
+  "lang": "en-AU",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

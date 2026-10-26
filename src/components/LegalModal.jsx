@@ -1,3 +1,5 @@
+'use client'
+
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { Close } from './icons.jsx'
 import RichText from './RichText.jsx'

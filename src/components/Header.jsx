@@ -1,4 +1,7 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { Close, Menu } from './icons.jsx'
 import Logo from './Logo.jsx'
 import { NAV } from '../data/content.js'
@@ -28,7 +31,11 @@ import { NAV } from '../data/content.js'
  * they work with no JS, are crawlable, and still navigate without a reload
  * when JS is running.
  */
-export default function Header({ route }) {
+export default function Header() {
+  // The App Router owns the current path. This used to arrive as a `route`
+  // prop from the hand-rolled router in App.jsx, which no longer exists.
+  const pathname = usePathname() || '/'
+  const route = pathname === '/' ? 'home' : pathname.replace(/^\/+|\/+$/g, '')
   const [open, setOpen] = useState(false)
   const [stuck, setStuck] = useState(false)
   const toggleRef = useRef(null)
