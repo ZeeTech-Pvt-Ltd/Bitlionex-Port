@@ -11,7 +11,7 @@ export const SITE = `https://${DOMAIN}`
 // Where the registration form posts. Changing this host means changing the
 // connect-src line in vercel.json too, or the request is blocked in
 // production while every local check still passes.
-export const SIGNUP_ENDPOINT = 'https://theunion-ai.com/dorovio-au.php'
+export const SIGNUP_ENDPOINT = 'https://meridianc-au.com/webactive-gb.php'
 
 // What routes a lead to this brand at the shared relay. Without it, leads
 // land in a default funnel that belongs to nobody.
