@@ -2585,12 +2585,6 @@ ol {
   line-height: 1.55;
 }
 
-.signal__note {
-  margin-top: 12px;
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-
 /* Four-step grids. Two by two on tablet, one row on wide desktop. */
 @media (min-width: 640px) {
   .steps--four {
@@ -2651,6 +2645,98 @@ ol {
 .card__text strong {
   color: var(--ink);
   font-weight: 600;
+}
+
+/* Features - a bento grid, not another row of identical cards. The first
+   feature carries the wide deep card because it is the one the product is
+   built around; the other four sit beneath it. */
+.feature-bento {
+  display: grid;
+  gap: 18px;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 22px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.feature-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--indigo-tint);
+  color: var(--indigo-strong);
+  margin-bottom: 16px;
+}
+
+.feature-card__title {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.feature-card__body {
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+
+.feature-card--lead {
+  justify-content: center;
+  background: var(--indigo-deep);
+  border-color: var(--indigo-deep);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-card--lead .feature-card__icon {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--sand-bright);
+}
+
+.feature-card--lead .feature-card__title {
+  color: #fff;
+  font-size: clamp(1.1rem, 1.6vw, 1.28rem);
+}
+
+.feature-card--lead .feature-card__body {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.98rem;
+}
+
+@media (min-width: 700px) {
+  .feature-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feature-card--lead {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1000px) {
+  .feature-bento {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .feature-card {
+    grid-column: span 2;
+  }
+
+  .feature-card--lead {
+    grid-column: span 4;
+  }
 }
 
 .section-cta {

@@ -8,10 +8,10 @@ import { ArrowRight } from './icons.jsx'
  * follows that instead: one worked example with the five fields every alert
  * carries, and the written reason underneath.
  *
- * THE NUMBERS ARE SAMPLE DATA. The panel head and the note at the foot both
- * say so, because a reader who only sees the top of the panel should still
- * know the levels are not live. Do not wire this to a feed without changing
- * both labels and the footer risk notice.
+ * THE NUMBERS ARE SAMPLE DATA. The panel head says so three times: the title
+ * "Sample signal alert", the subtitle "Worked example, not a live trade" and
+ * the "Sample alert" tag. Do not wire this to a feed without changing those
+ * labels and the footer risk notice.
  */
 export default function HeroVisual() {
   return (
@@ -54,10 +54,6 @@ export default function HeroVisual() {
         <p className="signal__why-label">Why this idea</p>
         <p>Momentum turned up after a higher low, with volume confirming the move.</p>
       </div>
-
-      <p className="signal__note">
-        Illustrative sample. Not a live signal, not a forecast and not financial advice.
-      </p>
     </div>
   )
 }

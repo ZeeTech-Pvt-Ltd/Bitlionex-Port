@@ -213,9 +213,8 @@ Two palettes live side by side and must not be mixed up:
 ### How the sample data is labelled
 
 The hero's signal alert is the only panel built from generated numbers. It
-labels itself three times: a `Sample alert` badge in the panel head, a
-`Worked example, not a live trade` subtitle, and a note at the foot saying it
-is not a live signal or a forecast.
+labels itself three times: the `Sample signal alert` title, the `Sample alert`
+badge, and the `Worked example, not a live trade` subtitle.
 
 There is no site-wide sentence covering generated data, so any new visual with
 sample numbers must carry its own labels. That is the rule, not a suggestion.
