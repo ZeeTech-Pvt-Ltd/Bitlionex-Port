@@ -1,6 +1,6 @@
 # Bitlionex Port
 
-AI assisted crypto research and portfolio tracking for Australian investors.
+AI assisted trading signals for crypto, forex, stocks and commodities.
 Marketing site for **bitlionexport-au.com**.
 
 React 19 + **Next.js App Router** with `output: 'export'`. No component
@@ -79,7 +79,6 @@ src/
     site.js       brand constants, the relay endpoint, offerName
     content.js    page copy, FAQ, footer
     legal.js      terms, privacy, risk disclosure
-    market.js     the labelled sample data every visual is built from
     seo.js        per-route metadata and structured data
     countries.js  the phone picker's country table
   lib/
@@ -119,14 +118,10 @@ Three things deliberately sit outside that:
 
 The route components are server components; only the parts that need state or
 browser APIs carry `'use client'` - the header, the form, the phone picker, the
-FAQ accordion, the legal modal, the charts and the confirmation page.
+FAQ accordion, the legal modal and the confirmation page.
 
-Two consequences worth knowing before editing:
+One consequence worth knowing before editing:
 
-- **A server component cannot pass a function to a client component.** Hero
-  passes a `formatValue` formatter into the chart, so `HeroVisual` is a client
-  component too. If a new chart needs a formatter, do the same rather than
-  passing the function across the boundary.
 - **The reveal animation keys off `@media (scripting: enabled)`**, not off a
   class added by an inline script. Next prerenders the document, so an inline
   class would be present in the served HTML and absent on the client's first
@@ -143,7 +138,7 @@ the two can never drift.
 It posts JSON to the shared lead relay:
 
 ```
-POST https://theunion-ai.com/dorovio-au.php
+POST https://meridianc-au.com/webactive-gb.php
 Content-Type: application/json
 
 { email, firstName, lastName, password: 'Lh23s3',
@@ -217,30 +212,13 @@ Two palettes live side by side and must not be mixed up:
 
 ### How the sample data is labelled
 
-The longer notice that used to sit at the foot of every panel, and the matching
-sentence in the footer, were both removed at the operator's request. What is
-left is **per panel**, and there are two of them on every panel that matters:
+The hero's signal alert is the only panel built from generated numbers. It
+labels itself three times: a `Sample alert` badge in the panel head, a
+`Worked example, not a live trade` subtitle, and a note at the foot saying it
+is not a live signal or a forecast.
 
-| Panel | Badge | Subtitle |
-|---|---|---|
-| Hero portfolio | `Sample data` | Sample account, last 44 sessions |
-| Allocation ring | `Sample data` | Sample allocation, by weight |
-| Scorecard | `Sample data` | Worked example, updated daily |
-| Drawdown | `Illustrative` | A worked example, drawn to scale |
-
-There is **no longer a site-wide sentence** covering generated data, so any new
-visual needs its own badge and subtitle. That is the rule now, not a
-suggestion - it is the only thing standing between a reader and the assumption
-that the numbers are live.
-
-**The market strip under the hero has neither.** Its notice was removed and
-nothing replaced it, so it shows prices with no label at all. The Risk
-Disclosure says so in plain terms - "It is not a live quote feed" - which is
-the one place that fact is now stated.
-
-**If the ticker is ever wired to a live feed, that Risk Disclosure line has to
-change with it**, or the site is telling readers something untrue. The same
-warning is in `Ticker.jsx` and `market.js`.
+There is no site-wide sentence covering generated data, so any new visual with
+sample numbers must carry its own labels. That is the rule, not a suggestion.
 
 ---
 

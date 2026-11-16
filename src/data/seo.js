@@ -31,7 +31,9 @@ export function ogImageAltFor(route) {
   // A colon, not a spaced hyphen. The house rule bans dashes used as dashes,
   // and "Bitlionex Port - What it does..." is exactly that - the copy suite
   // caught it on all seven cards.
-  return tagline ? `${BRAND}: ${tagline}` : `${BRAND}, crypto research for Australian investors`
+  return tagline
+    ? `${BRAND}: ${tagline}`
+    : `${BRAND}, AI assisted trading signals for Australian traders`
 }
 
 /* The six pages that are meant to be found. Everything else is either a
@@ -48,7 +50,7 @@ export const INDEXABLE = ['home', 'about', 'contact', 'faq', 'terms', 'privacy',
    ------------------------------------------------------------------------- */
 import { LEGAL_LAST_REVIEWED_ISO } from './site.js'
 
-export const CONTENT_UPDATED = '2026-09-29'
+export const CONTENT_UPDATED = '2026-11-16'
 
 // The legal documents already carry a reviewed date; the sitemap reuses it
 // rather than keeping a second copy that could drift.
@@ -56,15 +58,15 @@ const LEGAL_REVIEWED = LEGAL_LAST_REVIEWED_ISO
 
 export const seo = {
   home: {
-    title: `${BRAND} | AI Crypto Research Australia`,
-    // 145 characters. The limit is 155, and it is a limit rather than a
-    // target: a description that runs past it gets truncated in the result
-    // snippet, usually mid sentence and usually right where the call to
-    // action was.
+    title: `${BRAND} | AI Trading Signals Australia`,
+    // Under 155 characters, and the last sentence is the call to action. The
+    // operator's main keyword is "bitlionexport", which is carried in the
+    // keywords list below; the title keeps the readable brand form because
+    // "Bitlionexport" fails the brand-spelling check in verify-copy.mjs.
     description:
-      'Bitlionex Port turns your crypto holdings into one clear picture, with AI research behind every position. Built for Australia. Open your account.',
+      'Trade ideas with entry, stop-loss and take-profit levels, plus the reason behind each alert. Built for Australia. Start your free account today.',
     keywords:
-      'Bitlionex Port, AI crypto research Australia, crypto portfolio tracker Australia, bitcoin portfolio Australia, crypto research platform',
+      'bitlionexport, Bitlionex Port, AI trading signals Australia, crypto signals Australia, forex signals Australia, stock signals Australia',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1',
     // No trailing slash, matching trailingSlash: false in next.config.mjs.
     // Next normalises a canonical of `${SITE}/` down to `${SITE}` anyway, so
@@ -72,9 +74,9 @@ export const seo = {
     // sitemap entry and the URL the server actually serves all identical.
     canonical: SITE,
     card: {
-      line1: 'Your crypto holdings,',
-      line2: 'in one clear picture.',
-      note: 'AI assisted research and portfolio tracking for Australian investors.',
+      line1: 'Clear trade signals,',
+      line2: 'smarter decisions.',
+      note: 'AI assisted trade signals for crypto, forex, stocks and commodities.',
     },
     updated: CONTENT_UPDATED,
     structuredData: ['organization', 'website', 'faq', 'service', 'howto'],
@@ -92,8 +94,13 @@ export const seo = {
       line2: 'we wanted to use.',
       note: 'A research and tracking service for Australian crypto holders.',
     },
-    updated: CONTENT_UPDATED,
-    structuredData: ['organization', 'webpage', 'service'],
+    // This page's body did not change in the 2026-11-16 copy pass, so its
+    // lastmod stays at the date it last actually changed.
+    updated: '2026-09-29',
+    // No Service node here: the About body still describes the earlier
+    // research product, and a signals Service node on the same page would
+    // contradict it in a feed Google republishes.
+    structuredData: ['organization', 'webpage'],
   },
 
   contact: {
@@ -108,21 +115,21 @@ export const seo = {
       line2: 'not a chatbot.',
       note: 'Questions before you start? An Australian support team answers.',
     },
-    updated: CONTENT_UPDATED,
+    updated: '2026-09-29',
     structuredData: ['organization', 'webpage'],
   },
 
   faq: {
     title: `Bitlionex Port FAQ | Your Questions Answered`,
     description:
-      'Bitlionex Port answers what it does, what it costs, where your coins stay, and how the research works. Read the questions people ask first.',
-    keywords: 'Bitlionex Port FAQ, is Bitlionex Port legit, crypto research questions',
+      'Answers on Bitlionex Port trade signals, markets, risk and getting started. Read the questions traders ask before signing up.',
+    keywords: 'Bitlionex Port FAQ, bitlionexport FAQ, trading signals questions',
     robots: 'index, follow, max-image-preview:large, max-snippet:-1',
     canonical: `${SITE}/faq`,
     card: {
       line1: 'Straight answers,',
       line2: 'including the hard ones.',
-      note: 'What it does, what it costs, and where your coins stay.',
+      note: 'Signals, markets, risk and getting started, answered.',
     },
     updated: CONTENT_UPDATED,
     structuredData: ['faq', 'webpage'],
@@ -212,7 +219,7 @@ export const ORG_SCHEMA = {
   url: `${SITE}/`,
   logo: `${SITE}/icon-512.png`,
   description:
-    'Bitlionex Port is a research and portfolio tracking service for Australian crypto holders.',
+    'Bitlionex Port is an AI-assisted trading signals platform for crypto, forex, stocks and commodities.',
   areaServed: { '@type': 'Country', name: 'Australia' },
   contactPoint: {
     '@type': 'ContactPoint',
@@ -279,40 +286,38 @@ export function webpageSchema(route) {
 /**
  * Service - what is actually being offered.
  *
- * Nothing in here is a claim the site does not already make in words: research
- * and tracking, not custody, not advice, aimed at Australia. The two
- * `serviceOutput` entries exist to state the non-custody boundary in machine
- * readable form, because that is the single most misread thing about a site
- * like this one.
+ * Nothing in here is a claim the site does not already make in words: signals
+ * with a plan attached, and a clear boundary that the service never places a
+ * trade for the reader. Stated as capabilities rather than outcomes, because a
+ * Service node that promised a result would be a claim in a feed Google
+ * republishes.
  */
 export const SERVICE_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: `${BRAND} research and portfolio tracking`,
-  serviceType: 'Crypto market research and portfolio tracking',
+  name: `${BRAND} trading signals`,
+  serviceType: 'AI assisted trading signals',
   description:
-    'An AI assisted research service that scores the crypto assets a holder already owns and shows how the portfolio is spread. It does not take custody, place trades, or give personal financial advice.',
+    'An AI-assisted trading signals platform that monitors the crypto, forex, stock and commodity markets and sends buy or sell alerts with entry, stop-loss and take-profit levels and the reasoning behind each idea. It never places a trade for the reader.',
   provider: { '@type': 'Organization', name: BRAND, url: `${SITE}/` },
   areaServed: { '@type': 'Country', name: 'Australia' },
-  audience: { '@type': 'Audience', audienceType: 'Australian crypto holders' },
+  audience: { '@type': 'Audience', audienceType: 'Traders in Australia' },
   availableChannel: {
     '@type': 'ServiceChannel',
     serviceUrl: `${SITE}/`,
     availableLanguage: ['English'],
   },
-  // Stated as capabilities rather than outcomes. A Service node that promised
-  // a result would be a claim in a feed Google republishes.
   serviceOutput: [
-    { '@type': 'Thing', name: 'A scored view of each asset held' },
-    { '@type': 'Thing', name: 'How the portfolio is spread, including concentration' },
-    { '@type': 'Thing', name: 'The assets stay with the holder, not the service' },
+    { '@type': 'Thing', name: 'Buy or sell alerts with an entry, stop-loss and take-profit level' },
+    { '@type': 'Thing', name: 'A plain-English reason behind every alert' },
+    { '@type': 'Thing', name: 'The reader decides whether to act, not the service' },
   ],
 }
 
 /**
- * HowTo - the three steps on the home page.
+ * HowTo - the sign-up steps on the home page.
  *
- * Built from the same STEPS the page renders, so the markup cannot describe a
+ * Built from the same array the page renders, so the markup cannot describe a
  * step a reader cannot see. `text` is the step body, which is already written
  * as an instruction.
  */
@@ -320,16 +325,16 @@ export function howtoSchema(steps) {
   return {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
-    name: 'How Bitlionex Port works',
+    name: 'How to get started with Bitlionex Port',
     description:
-      'Add what you hold, let the research layer score it, and read what changed. No exchange login and no wallet keys are ever needed.',
-    totalTime: 'PT10M',
+      'Sign up, confirm your ID, add funds and follow your first signal. The first alert is two minutes away.',
+    totalTime: 'PT2M',
     step: steps.map((s, i) => ({
       '@type': 'HowToStep',
       position: i + 1,
       name: s.title,
       text: s.body,
-      url: `${SITE}/#how-it-works`,
+      url: `${SITE}/#get-started`,
     })),
   }
 }

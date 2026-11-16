@@ -2,108 +2,334 @@
 // Page copy
 // =========================================================
 // Every word a visitor reads lives here rather than inside a component, so
-// the voice stays consistent across eleven sections and two page types, and
-// so a copy change never turns into a JSX change.
+// the voice stays consistent across the page and so a copy change never turns
+// into a JSX change.
 //
-// House rules this file follows, and which any edit here has to keep:
+// The homepage copy follows the operator's content document (2026-11-16)
+// section for section, in the same order. The only additions are the form,
+// which the site requires, and the punctuation-level fixes needed to pass the
+// copy checks in .arttmp/verify-copy.mjs (the document's one 50-word sentence
+// is split in two; no words were changed).
 //
-//   No em dashes, no en dashes, no decorative hyphens. Full stops, commas
-//   and conjunctions do the work instead.
+// House rules this file follows:
+//
+//   No em dashes, no en dashes, no spaced hyphen used as a dash.
 //   Title Case on every heading.
 //   Around 80% "you" and 20% "we". This is written to the reader.
 //   Short paragraphs. One to three sentences, then a break.
-//   No invented numbers. Anything the business has not set yet is a
-//   [PLACEHOLDER] token, rendered visibly, so it cannot ship by accident.
+//   No invented numbers. The two figures in the FAQ were supplied by the
+//   operator on 2026-11-16.
 // =========================================================
-
-import { RISKS, STEPS } from './market.js'
 
 /* -------------------------------------------------------------------------
    Hero
    ------------------------------------------------------------------------- */
 
 export const HERO = {
-  eyebrow: 'Research For Australian Crypto Holders',
-  // Kept short enough to wrap onto two lines rather than three, and it
-  // carries the brand name, which is the page's primary term.
-  h1: 'Bitlionex Port Puts Research Behind Every Coin You Hold',
+  h1: 'Clear Trade Signals, Smarter Decisions With Bitlionex Port',
   lede:
-    'Most apps show you a price and stop there. You need the rest of it. What your holdings add up to, how much of your money sits in one place, and what changed since you last looked.',
-  points: [
-    'No exchange login needed',
-    'Your coins stay where they are',
-    'Support around the clock',
-  ],
-  primaryCta: 'Open Your Account',
-  secondaryCta: 'See How It Works',
+    'Get trade ideas that come with a plan attached. Built for traders across Australia, Bitlionex Port tells you where to enter, where to exit and why the opportunity is worth a look, all in one easy-to-read alert.',
+  primaryCta: 'Start Your Free Account',
+  micro: 'Ready in 2 minutes · No hidden costs · Privacy built in',
 }
 
 /* -------------------------------------------------------------------------
-   What this is
+   What Is Bitlionex Port?
    ------------------------------------------------------------------------- */
 
 export const WHAT_IS = {
-  eyebrow: 'What This Is',
-  h2: 'A Research Desk For Your Crypto, Not Another Price App',
+  h2: 'What Is Bitlionex Port?',
+  // The document carries this as one 50-word sentence. It is split in two at
+  // "It sends you", with no words changed, so it passes the sentence-length
+  // check in verify-copy.mjs.
   body: [
-    'You already know how to look up what Bitcoin costs. That part takes four seconds and tells you almost nothing about your own situation.',
-    'The harder questions are the ones nobody answers for you. Is too much of my money riding on one coin? Has anything I hold quietly changed character? Where would it hurt most if this all fell tomorrow?',
-    'Bitlionex Port is built around those. You add what you hold. Our research layer scores every position on the same five measures, then shows you the whole picture in plain English.',
+    'Bitlionex Port is an AI-assisted trading signals platform that monitors the crypto, forex, stock and commodity markets. It sends you precise buy or sell alerts, each with an entry level, a stop-loss, a take-profit target and the reasoning behind it, so you can make your own trading decisions with more confidence.',
+    'Most people don’t lose trades because they picked the wrong market. They lose because they had no plan for getting in or getting out. Bitlionex Port fixes that by attaching a full plan to every idea, and by explaining it in words that make sense even if you are brand new to trading.',
   ],
-  ticks: [
-    'One dashboard for every coin you hold, across every exchange',
-    'The same five measures applied to every position, every time',
-    'Concentration shown plainly, including when the answer is uncomfortable',
+  image: {
+    src: '/market-app.webp',
+    srcSet: '/market-app-400.webp 400w, /market-app-800.webp 800w, /market-app.webp 1000w',
+    alt: 'An illustration of a market app on a phone, with cards representing a currency pair and a market index.',
+  },
+}
+
+/* -------------------------------------------------------------------------
+   How Bitlionex Port signals work
+   ------------------------------------------------------------------------- */
+
+export const HOW_SIGNALS = {
+  h2: 'How Bitlionex Port Signals Work',
+  steps: [
+    {
+      n: '01',
+      title: 'Market Tracking',
+      body:
+        'Technology and analysts follow live prices, trend changes and important economic updates.',
+    },
+    {
+      n: '02',
+      title: 'Quality Filter',
+      body:
+        'Weak or unclear setups are dropped. Only ideas with a defined direction and limited risk get through.',
+    },
+    {
+      n: '03',
+      title: 'Instant Delivery',
+      body:
+        'A single alert lands on your device with the market, direction, entry, stop-loss, take-profit and reason.',
+    },
+    {
+      n: '04',
+      title: 'Your Move',
+      body:
+        'Take the trade, change it to match your style or skip it. You are always in charge.',
+    },
   ],
 }
 
 /* -------------------------------------------------------------------------
-   How it works
+   Trading with vs without
    ------------------------------------------------------------------------- */
 
-export const HOW = {
-  eyebrow: 'How It Works',
-  h2: 'Three Steps, And None Of Them Involve Your Wallet Keys',
-  lede:
-    'You can be looking at your first scored portfolio in about the time it takes to make a coffee.',
-  steps: STEPS,
-}
-
-/* -------------------------------------------------------------------------
-   Method
-   ------------------------------------------------------------------------- */
-
-export const METHOD = {
-  eyebrow: 'How The Research Is Built',
-  h2: 'Five Inputs, Scored The Same Way Every Time',
-  body: [
-    'A score is only worth reading if you know what went into it. So here is what goes into ours.',
-    'Every position is scored on trend, liquidity, volatility, concentration and data coverage. Five measures, each built from the inputs below.',
-    'Where the data is thin, the coverage score drops and the panel says so. We would rather show you a gap than fill it with a guess.',
+export const COMPARISON = {
+  h2: 'Trading With vs Without Bitlionex Port',
+  withoutLabel: 'Without Bitlionex Port',
+  withLabel: 'With Bitlionex Port',
+  rows: [
+    {
+      without: 'Long hours reading charts and news',
+      with: 'Key findings delivered in one short alert',
+    },
+    {
+      without: 'Unsure where to enter or exit',
+      with: 'Clear entry, stop-loss and take-profit levels',
+    },
+    {
+      without: 'Decisions based on emotion',
+      with: 'Every idea backed by a written reason',
+    },
+    {
+      without: 'Opportunities lost during a busy day',
+      with: 'Alerts that find you wherever you are',
+    },
   ],
 }
 
 /* -------------------------------------------------------------------------
-   Coverage
+   Quick highlights
    ------------------------------------------------------------------------- */
 
-export const COVERAGE_COPY = {
-  eyebrow: 'What You Can Track',
-  h2: 'Built Around The Assets Australians Actually Hold',
-  lede:
-    'Concentration and cash count. So the tracker counts what a lot of platforms leave out: the money you have not put in, and the coins you would struggle to sell.',
+export const HIGHLIGHTS = {
+  h2: 'Quick Highlights',
+  items: [
+    {
+      lead: 'Four markets, one account:',
+      body: 'crypto, forex, stocks and commodities',
+    },
+    {
+      lead: null,
+      body: 'Every alert comes with a plain-English explanation',
+    },
+    {
+      lead: null,
+      body: 'Works on your phone, tablet and computer',
+    },
+    {
+      lead: null,
+      body: 'You decide how much risk to take on each trade',
+    },
+  ],
 }
 
 /* -------------------------------------------------------------------------
-   Risk band - deliberately placed before the form
+   Why choose us
    ------------------------------------------------------------------------- */
 
-export const RISK = {
-  eyebrow: 'Read This Before You Sign Up',
-  h2: 'The Part Most Platforms Put At The Bottom In Small Grey Text',
-  lede:
-    'Crypto is volatile. You can lose money, including money you put in this week. We would rather you knew that now than found out later.',
-  risks: RISKS,
+export const WHY = {
+  h2: 'Why Choose Us',
+  items: [
+    {
+      lead: 'Easy to follow',
+      body: 'No complicated terms. Each signal reads like advice from a knowledgeable friend.',
+    },
+    {
+      lead: 'Your time back',
+      body: 'We take care of the research, so you spend minutes, not hours, on the markets.',
+    },
+    {
+      lead: 'Right on time',
+      body: 'Alerts go out the moment a setup is confirmed, not after the move is over.',
+    },
+    {
+      lead: 'People who care',
+      body: 'Our support team answers your questions quickly through live chat and email.',
+    },
+  ],
+  cta: 'Join Bitlionex Port Today',
+}
+
+/* -------------------------------------------------------------------------
+   How to get started
+   ------------------------------------------------------------------------- */
+
+export const GET_STARTED = {
+  h2: 'How to Get Started',
+  sub: 'Your First Signal in 4 Simple Steps',
+  steps: [
+    {
+      n: '01',
+      title: 'Sign Up',
+      body: 'Enter your name, email address and phone number.',
+    },
+    {
+      n: '02',
+      title: 'Confirm Your ID',
+      body: 'A quick identity check keeps your account protected.',
+    },
+    {
+      n: '03',
+      title: 'Add Funds',
+      body: 'Choose a deposit method that is convenient for you.',
+    },
+    {
+      n: '04',
+      title: 'Follow Your First Signal',
+      body:
+        'Select your markets, set your risk limits and review your first trade idea.',
+    },
+  ],
+  cta: 'Open My Free Account',
+}
+
+/* -------------------------------------------------------------------------
+   Markets
+   ------------------------------------------------------------------------- */
+
+export const MARKETS = {
+  h2: 'Markets',
+  rows: [
+    {
+      badge: 'CRYPTO',
+      name: 'Crypto',
+      body: 'Signals on leading digital coins like Bitcoin and Ethereum.',
+    },
+    {
+      badge: 'FOREX',
+      name: 'Forex',
+      body: 'Alerts on highly traded currency pairs, including AUD/USD, EUR/USD and GBP/USD.',
+    },
+    {
+      badge: 'STOCKS',
+      name: 'Stocks',
+      body:
+        'Opportunities in leading Australian companies on the ASX, as well as big international brands.',
+    },
+    {
+      badge: 'COMMOD',
+      name: 'Commodities',
+      body: 'Trade ideas on gold, silver and oil price movements.',
+    },
+  ],
+}
+
+/* -------------------------------------------------------------------------
+   Features
+   ------------------------------------------------------------------------- */
+
+export const FEATURES = {
+  h2: 'Features',
+  items: [
+    {
+      lead: 'Signals that explain themselves',
+      body: 'Know what to trade and the logic behind every call.',
+    },
+    {
+      lead: 'Built-in exit plan',
+      body: 'Each alert includes its own stop-loss and take-profit levels.',
+    },
+    {
+      lead: 'Personal price alerts',
+      body: 'Set any price level and get notified when the market reaches it.',
+    },
+    {
+      lead: 'Clear dashboard',
+      body: 'See your balance, open positions and past trades in one place.',
+    },
+    {
+      lead: 'No download needed',
+      body: 'Use Bitlionex Port straight from your browser on any device.',
+    },
+  ],
+}
+
+/* -------------------------------------------------------------------------
+   Learn as you trade
+   ------------------------------------------------------------------------- */
+
+export const LEARN = {
+  h2: 'Learn as You Trade',
+  body:
+    'Every Bitlionex Port alert is also a small lesson. Because each signal explains why it was sent, you gradually learn how trends form, why support and resistance levels matter and how good traders manage risk. Over time, you start spotting setups yourself and trading with more independence.',
+  image: {
+    src: '/portfolio-app.webp',
+    srcSet:
+      '/portfolio-app-400.webp 400w, /portfolio-app-800.webp 800w, /portfolio-app.webp 1000w',
+    alt: 'An illustration of a phone showing a portfolio app, with cards representing markets and holdings.',
+  },
+}
+
+/* -------------------------------------------------------------------------
+   Who it is for
+   ------------------------------------------------------------------------- */
+
+export const AUDIENCE = {
+  h2: 'Who It’s For',
+  items: [
+    {
+      lead: 'Complete beginners',
+      body: 'Start your trading journey with guidance that explains every step.',
+    },
+    {
+      lead: 'Busy professionals',
+      body: 'Fit the markets around a busy Australian workday in just a few minutes.',
+    },
+    {
+      lead: 'Experienced traders',
+      body: 'Compare our ideas with your own analysis and explore new markets.',
+    },
+  ],
+}
+
+/* -------------------------------------------------------------------------
+   Security and transparency
+   ------------------------------------------------------------------------- */
+
+export const SECURITY = {
+  h2: 'Security & Transparency',
+  items: [
+    {
+      lead: 'Secure data',
+      body: 'Encryption keeps your personal and payment details private.',
+    },
+    {
+      lead: 'Extra login protection',
+      body: 'Two-factor authentication blocks anyone else from your account.',
+    },
+    {
+      lead: 'Clear costs',
+      body: 'All fees are listed openly before you make any payment.',
+    },
+    {
+      lead: 'You stay in control',
+      body: 'Bitlionex Port never places a trade without your permission.',
+    },
+  ],
+  // The document's risk notice, verbatim. It sits in this section, above the
+  // FAQ and the registration form, so a reader meets the downside before
+  // being asked for a phone number.
+  riskNotice:
+    'Trading involves a high level of risk, and you could lose some or all of your money. Bitlionex Port signals are guidance only and cannot guarantee profits. Past performance does not predict future results.',
+  cta: 'Create a Secure Account',
 }
 
 /* -------------------------------------------------------------------------
@@ -111,95 +337,70 @@ export const RISK = {
    ------------------------------------------------------------------------- */
 
 export const FAQ = {
-  eyebrow: 'Common Questions',
-  h2: 'Straight Answers, Including The Uncomfortable Ones',
-  lede: 'If your question is not here, ask us directly. We would rather answer it now than have you guess.',
+  h2: 'FAQs',
 }
 
-/* Each item carries two versions of the same answer: `a` is rendered as JSX
-   and may hold markup, `plain` is the schema-safe string that goes into the
-   FAQPage JSON-LD. They have to say the same thing, so edit them together. */
+// One helper so `a` (rendered) and `plain` (the schema-safe string) cannot
+// drift apart. FAQ questions are exempt from the Title Case rule because they
+// are content rendered in a heading tag, not section titles.
+const faq = (q, a) => ({ q, a, plain: a })
+
 export const FAQ_ITEMS = [
-  {
-    q: 'What does Bitlionex Port actually do?',
-    a: 'It is a research and tracking service. You tell it which coins you hold and how much of each. It scores every position on the same five measures, shows you how your money is spread, and flags what changed.',
-    plain:
-      'It is a research and tracking service. You tell it which coins you hold and how much of each. It scores every position on the same five measures, shows you how your money is spread, and flags what changed.',
-  },
-  {
-    q: 'Do you hold my crypto or trade on my behalf?',
-    a: 'No. Your coins stay exactly where they are, in whatever exchange or wallet you already use. We never take custody, never hold your keys, and never place a trade. Nothing moves because you signed up here.',
-    plain:
-      'No. Your coins stay exactly where they are, in whatever exchange or wallet you already use. We never take custody, never hold your keys, and never place a trade. Nothing moves because you signed up here.',
-  },
-  {
-    q: 'Is Bitlionex Port a broker or a financial adviser?',
-    a: 'Neither. We do not execute trades and we do not give personal financial advice. What we publish is general research about market data, put together so you can make your own decisions with better information in front of you.',
-    plain:
-      'Neither. We do not execute trades and we do not give personal financial advice. What we publish is general research about market data, put together so you can make your own decisions with better information in front of you.',
-  },
-  {
-    q: 'What does it cost to open an account?',
-    a: 'Nothing to open one. Any ongoing cost is shown in full before you are asked to pay anything, and there is no point at which you are charged without being told first.',
-    plain:
-      'Nothing to open one. Any ongoing cost is shown in full before you are asked to pay anything, and there is no point at which you are charged without being told first.',
-  },
-  {
-    q: 'How much do I need to start?',
-    a: 'There is a minimum funding level, and the platform sets it rather than us. You get it in writing before anything is transferred, so you are never guessing and never charged by surprise. Nothing about opening the account costs you anything.',
-    plain:
-      'There is a minimum funding level, and the platform sets it rather than us. You get it in writing before anything is transferred, so you are never guessing and never charged by surprise. Nothing about opening the account costs you anything.',
-  },
-  {
-    q: 'Do you promise any kind of return?',
-    a: 'No, and be careful with anyone who does. Crypto markets can fall hard and stay down for a long time. A high score on our dashboard is a summary of what the data showed, not a promise about what happens next.',
-    plain:
-      'No, and be careful with anyone who does. Crypto markets can fall hard and stay down for a long time. A high score on our dashboard is a summary of what the data showed, not a promise about what happens next.',
-  },
-  {
-    q: 'How does the AI research actually work?',
-    a: 'It reads five kinds of input: spot price, order book depth, network activity, derivatives positioning and published research. Each position is scored against those on the same five measures. You can see the whole breakdown on your dashboard, including the parts where the data is thin.',
-    plain:
-      'It reads five kinds of input: spot price, order book depth, network activity, derivatives positioning and published research. Each position is scored against those on the same five measures. You can see the whole breakdown on your dashboard, including the parts where the data is thin.',
-  },
-  {
-    q: 'What happens to the personal information I give you?',
-    a: 'We ask for your name, email and phone number so we can set up your account and contact you about it. We do not sell your details. The Privacy Policy sets out exactly what we collect, why, and how to have it removed.',
-    plain:
-      'We ask for your name, email and phone number so we can set up your account and contact you about it. We do not sell your details. The Privacy Policy sets out exactly what we collect, why, and how to have it removed.',
-  },
-  {
-    q: 'Can I use this if I live outside Australia?',
-    a: 'The service is built for Australian residents and priced in Australian dollars. If you are somewhere else, the rules that apply to you may be different, and it is worth checking your local requirements before you sign up.',
-    plain:
-      'The service is built for Australian residents and priced in Australian dollars. If you are somewhere else, the rules that apply to you may be different, and it is worth checking your local requirements before you sign up.',
-  },
-  {
-    q: 'What if I decide it is not for me?',
-    a: 'Then stop using it. There is nothing to unwind, because we never held your coins in the first place. Ask us to delete your account and the details attached to it, and we will.',
-    plain:
-      'Then stop using it. There is nothing to unwind, because we never held your coins in the first place. Ask us to delete your account and the details attached to it, and we will.',
-  },
+  faq(
+    'What is Bitlionex Port?',
+    'Bitlionex Port is a trading signals platform that researches the markets and sends you alerts with entry, stop-loss and take-profit levels, along with the reason for each trade.',
+  ),
+  faq(
+    'How are Bitlionex Port signals selected?',
+    'Each setup is checked against clear entry and risk rules. Only ideas that pass those checks are sent to you.',
+  ),
+  faq(
+    'Is Bitlionex Port good for beginners?',
+    'Yes. Every alert is written in simple language, and the explanations help you learn as you go.',
+  ),
+  faq(
+    'Does Bitlionex Port place trades for me?',
+    'No. You review each signal and decide for yourself whether to trade it.',
+  ),
+  faq(
+    'What markets does Bitlionex Port cover?',
+    'Crypto, forex, stocks and commodities, all in one account.',
+  ),
+  faq(
+    'Can I use Bitlionex Port in Australia?',
+    'Yes. Traders anywhere in the country can sign up and receive alerts online, on any device.',
+  ),
+  faq(
+    'Do I need to download anything?',
+    'No. Bitlionex Port works in any web browser on your phone, tablet or computer.',
+  ),
+  // Values supplied by the operator on 2026-11-16. Do not change these without
+  // a matching instruction, and never substitute an invented figure.
+  faq('What is the minimum deposit?', 'You can begin with $250.'),
+  faq('How long do withdrawals take?', 'Withdrawals usually take 1 to 3 days.'),
+  faq(
+    'Can I lose money using Bitlionex Port?',
+    'Yes. All trading carries risk, so only trade with money you can afford to lose.',
+  ),
 ]
 
-/* How many questions the homepage teaser shows. The rest live on /faq. */
-export const FAQ_TEASER_COUNT = 5
+/* -------------------------------------------------------------------------
+   Testimonials
+   -------------------------------------------------------------------------
+   Deliberately absent. The content document says to keep this section hidden
+   until verified reviews exist, and the house rules forbid invented
+   testimonials. Nothing renders it, so there is no placeholder to ship.
+   ------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------
    Register section
    ------------------------------------------------------------------------- */
 
 export const REGISTER = {
-  eyebrow: 'Open Your Account',
-  h2: 'Start With Your Name And An Email Address',
-  lede:
-    'That is genuinely all it takes to get in. No exchange login, no wallet connection, no card details at this step.',
-  ticks: [
-    'Your coins never move and we never get your keys',
-    'You see the full research breakdown, including the weak spots',
-    'One phone call or email and a person answers it',
-  ],
-  formHeading: "Let's Get You Started",
+  h2: 'Start Your Free Account',
+  lede: 'Ready in 2 minutes · No hidden costs · Privacy built in',
+  formHeading: 'Open My Free Account',
+  submitCta: 'Get Started Free',
 }
 
 /* -------------------------------------------------------------------------
@@ -207,12 +408,11 @@ export const REGISTER = {
    ------------------------------------------------------------------------- */
 
 export const FINAL_CTA = {
-  h2: 'Your Portfolio Already Exists. Now You Can See It.',
+  h2: 'Make Your Next Trade a Smarter One',
   body:
-    'Add what you hold, read what the research says, and decide for yourself from there. That is the whole offer.',
-  primaryCta: 'Open Your Account',
-  secondaryCta: 'Read The FAQ',
-  secondaryHref: '/faq',
+    'Sign up with Bitlionex Port and receive clear, well-explained trade ideas, while every decision stays firmly in your hands.',
+  cta: 'Get Started Free',
+  micro: '2-minute sign-up · No joining fee',
 }
 
 /* -------------------------------------------------------------------------
@@ -404,11 +604,12 @@ export const FOOTER = {
     { label: 'Privacy Policy', href: '/privacy' },
   ],
   blurb:
-    'Bitlionex Port is a research and portfolio tracking service for Australian crypto holders. We do not hold your funds, place trades for you, or give personal financial advice.',
+    'Bitlionex Port is an AI-assisted trading signals platform that monitors the crypto, forex, stock and commodity markets.',
   riskHeading: 'Risk Warning',
+  // The document's risk notice, verbatim. This is the sitewide warning that
+  // every page carries in the footer.
   riskParas: [
-    'Crypto assets are volatile. Prices can fall quickly and stay down, and you can lose some or all of the money you put in. Never invest money you cannot afford to lose.',
-    'Nothing published by Bitlionex Port is personal financial advice or a recommendation to buy or sell any asset. Research describes market data, and past market behaviour does not indicate what will happen next. Consider your own circumstances, and seek licensed advice if you need it.',
+    'Trading involves a high level of risk, and you could lose some or all of your money. Bitlionex Port signals are guidance only and cannot guarantee profits. Past performance does not predict future results.',
   ],
   copyright: `© ${new Date().getFullYear()} Bitlionex Port. All rights reserved.`,
 }

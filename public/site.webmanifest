@@ -1,7 +1,7 @@
 {
   "name": "Bitlionex Port",
   "short_name": "Bitlionex",
-  "description": "AI assisted crypto research and portfolio tracking for Australian investors.",
+  "description": "AI assisted trading signals for crypto, forex, stocks and commodities, built for traders in Australia.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f7f7fc",

@@ -5,9 +5,8 @@ import { FINAL_CTA } from '../data/content.js'
  * FinalCta - the closing block, on a deep indigo ground.
  *
  * Short on purpose. Everything above it has already made the argument, so
- * this only has to repeat the offer and get out of the way. The second button
- * goes to the FAQ rather than back to the top of the page, because the people
- * still reading at this point usually have one specific question left.
+ * this only has to repeat the offer and get out of the way. One button, the
+ * one the content document names, pointing at the form above it.
  */
 export default function FinalCta() {
   return (
@@ -20,12 +19,10 @@ export default function FinalCta() {
           <p>{FINAL_CTA.body}</p>
           <div className="cta__actions">
             <a className="btn btn--on-deep" href="#register" data-scroll="#register">
-              {FINAL_CTA.primaryCta}
-            </a>
-            <a className="btn btn--on-deep-ghost" href={FINAL_CTA.secondaryHref}>
-              {FINAL_CTA.secondaryCta}
+              {FINAL_CTA.cta}
             </a>
           </div>
+          <p className="cta__micro">{FINAL_CTA.micro}</p>
         </Reveal>
       </div>
     </section>

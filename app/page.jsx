@@ -1,15 +1,19 @@
 import { pageMetadata } from '@/lib/metadata.js'
 import JsonLd from '@/components/JsonLd.jsx'
-import { FAQ, FAQ_ITEMS, FAQ_TEASER_COUNT } from '@/data/content.js'
+import { FAQ, FAQ_ITEMS } from '@/data/content.js'
 
 import Hero from '@/components/Hero.jsx'
-import Ticker from '@/components/Ticker.jsx'
-import TrustStrip from '@/components/TrustStrip.jsx'
 import WhatIs from '@/components/WhatIs.jsx'
 import HowItWorks from '@/components/HowItWorks.jsx'
-import Method from '@/components/Method.jsx'
-import Coverage from '@/components/Coverage.jsx'
-import RiskBand from '@/components/RiskBand.jsx'
+import Comparison from '@/components/Comparison.jsx'
+import Highlights from '@/components/Highlights.jsx'
+import WhyChoose from '@/components/WhyChoose.jsx'
+import GetStarted from '@/components/GetStarted.jsx'
+import Markets from '@/components/Markets.jsx'
+import Features from '@/components/Features.jsx'
+import Learn from '@/components/Learn.jsx'
+import Audience from '@/components/Audience.jsx'
+import Security from '@/components/Security.jsx'
 import Faq from '@/components/Faq.jsx'
 import SectionHead from '@/components/SectionHead.jsx'
 import Register from '@/components/Register.jsx'
@@ -17,41 +21,36 @@ import FinalCta from '@/components/FinalCta.jsx'
 
 export const metadata = pageMetadata('home')
 
-/* The homepage teaser. The full list lives on /faq; both read the same FAQ
-   array, which is also what schemasFor() turns into JSON-LD. */
-function FaqTeaser() {
+/* The FAQ section. The same array feeds /faq and the FAQPage structured data,
+   so the homepage cannot answer a question differently from the FAQ page. */
+function FaqSection() {
   return (
-    <section className="section section--surface" id="faq">
+    <section className="section section--paper" id="faq">
       <div className="wrap">
-        <SectionHead eyebrow={FAQ.eyebrow} title={FAQ.h2} lede={FAQ.lede} center />
-        {/* Centred to sit under the centred heading. .wrap--narrow carries only
-            a max-width, so on its own it does not centre. */}
+        <SectionHead title={FAQ.h2} center />
         <div className="wrap--narrow" style={{ margin: '0 auto' }}>
-          <Faq items={FAQ_ITEMS} limit={FAQ_TEASER_COUNT} idPrefix="faqteaser" />
+          <Faq items={FAQ_ITEMS} idPrefix="faqhome" />
         </div>
-        <p style={{ marginTop: 24, textAlign: 'center' }}>
-          <a className="link-arrow" href="/faq">
-            Read every question
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M5 12h14" />
-              <path d="m13 6 6 6-6 6" />
-            </svg>
-          </a>
-        </p>
       </div>
     </section>
   )
 }
 
 /**
- * Home. The order is deliberate:
+ * Home. The order follows the operator's content document section for
+ * section:
  *
- *   The risk band sits BEFORE the form, so a reader meets the downside before
- *   being asked for a phone number rather than after.
- *   The FAQ sits above the form for the same reason - its questions are the
- *   ones someone has immediately before signing up.
- *   Every section carries a visual. A run of plain text between two data
- *   panels reads as filler.
+ *   Hero, What Is, How Signals Work, With vs Without, Quick Highlights,
+ *   Why Choose Us, How to Get Started, Markets, Features, Learn as You Trade,
+ *   Who It's For, Security & Transparency, FAQs, Final CTA.
+ *
+ * Two deliberate departures:
+ *
+ *   The Testimonials section is hidden, as the document itself instructs,
+ *   until verified reviews exist.
+ *   The registration form sits between the FAQ and the final call to action,
+ *   because the site needs a form and every call to action on the page points
+ *   at it. The risk notice in the security section stays above it.
  */
 export default function HomePage() {
   return (
@@ -59,14 +58,18 @@ export default function HomePage() {
       <JsonLd route="home" />
 
       <Hero />
-      <Ticker />
-      <TrustStrip />
       <WhatIs />
       <HowItWorks />
-      <Method />
-      <Coverage />
-      <RiskBand />
-      <FaqTeaser />
+      <Comparison />
+      <Highlights />
+      <WhyChoose />
+      <GetStarted />
+      <Markets />
+      <Features />
+      <Learn />
+      <Audience />
+      <Security />
+      <FaqSection />
       <Register />
       <FinalCta />
     </>

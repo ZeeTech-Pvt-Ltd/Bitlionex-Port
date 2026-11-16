@@ -1,6 +1,5 @@
 import { schemasFor } from '@/data/seo.js'
-import { FAQ_ITEMS } from '@/data/content.js'
-import { STEPS } from '@/data/market.js'
+import { FAQ_ITEMS, GET_STARTED } from '@/data/content.js'
 
 /**
  * Emits a route's structured data straight into the prerendered HTML.
@@ -16,7 +15,10 @@ import { STEPS } from '@/data/market.js'
  */
 export default function JsonLd({ route }) {
   const faqItems = route === 'home' || route === 'faq' ? FAQ_ITEMS : []
-  const schema = schemasFor(route, faqItems, STEPS)
+  // The HowTo markup describes the sign-up steps, which are the only steps a
+  // reader can follow themselves. The four signal stages are an explanation,
+  // not a procedure, so they do not belong in HowTo markup.
+  const schema = schemasFor(route, faqItems, GET_STARTED.steps)
 
   return schema.map((data, i) => (
     <script

@@ -109,7 +109,7 @@ export default function Header() {
 
           <div className="header__actions">
             <a className="btn btn--primary btn--sm" href="#register" data-scroll="#register">
-              Open Your Account
+              Get Started Free
             </a>
             <button
               type="button"
@@ -149,7 +149,7 @@ export default function Header() {
             data-scroll="#register"
             onClick={() => setOpen(false)}
           >
-            Open Your Account
+            Get Started Free
           </a>
         </div>
       </div>

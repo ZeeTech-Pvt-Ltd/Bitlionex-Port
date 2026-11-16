@@ -3,7 +3,7 @@
 import { useLeadForm } from '../lib/useLeadForm.js'
 import PhoneField from './PhoneField.jsx'
 import { useLegal } from './LegalModal.jsx'
-import { Alert, Loader, Shield } from './icons.jsx'
+import { Alert, Loader } from './icons.jsx'
 import { REGISTER } from '../data/content.js'
 
 /**
@@ -53,10 +53,6 @@ export default function RegistrationForm() {
     <form className="form" onSubmit={handleSubmit} noValidate>
       <div className="form__head">
         <h3 className="form__title">{REGISTER.formHeading}</h3>
-        <span className="form__badge">
-          <Shield size={15} />
-          No card details needed
-        </span>
       </div>
       <p className="form__intro">
         We only need your name and contact details to begin. Fields marked{' '}
@@ -228,7 +224,7 @@ export default function RegistrationForm() {
             Setting up your account…
           </>
         ) : (
-          'Open Your Account'
+          REGISTER.submitCta
         )}
       </button>
     </form>

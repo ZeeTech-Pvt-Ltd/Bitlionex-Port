@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Bitlionex Port - AI assisted crypto research and portfolio tracking for Australian investors.",
+  "description": "Bitlionex Port - AI assisted trading signals for crypto, forex, stocks and commodities.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

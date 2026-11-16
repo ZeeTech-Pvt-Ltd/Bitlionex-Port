@@ -1,97 +1,63 @@
-'use client'
-
-import { LineChart } from './charts.jsx'
-import { HERO_SERIES, HERO_TILES, formatAud } from '../data/market.js'
 import { ArrowRight } from './icons.jsx'
 
 /**
- * HeroVisual - what the dashboard looks like.
+ * HeroVisual - what one signal alert looks like.
  *
- * One hero figure, one trend line, two supporting tiles. Everything on it is
- * labelled sample data in the panel head as well as in the note at the foot,
- * because a visitor who reads only the top of a panel should still know the
- * numbers are not live.
+ * The old hero showed a portfolio chart. The content document describes a
+ * different product (signals with an entry, a stop and a target), so the panel
+ * follows that instead: one worked example with the five fields every alert
+ * carries, and the written reason underneath.
  *
- * The value is in Australian dollars with the A$ prefix, which is the market
- * this is built for.
+ * THE NUMBERS ARE SAMPLE DATA. The panel head and the note at the foot both
+ * say so, because a reader who only sees the top of the panel should still
+ * know the levels are not live. Do not wire this to a feed without changing
+ * both labels and the footer risk notice.
  */
 export default function HeroVisual() {
-  // The series is indexed to 100. Scale it to a portfolio figure so the line
-  // and the headline number describe the same thing rather than two.
-  const START = 44200
-  const scaled = HERO_SERIES.map((v) => (v / 100) * START)
-  const latest = scaled[scaled.length - 1]
-  const change = ((latest - START) / START) * 100
-
   return (
     <div className="panel">
       <div className="panel__head">
         <div>
-          <p className="panel__title">Portfolio overview</p>
-          <p className="panel__sub">Sample account, last 44 sessions</p>
+          <p className="panel__title">Sample signal alert</p>
+          <p className="panel__sub">Worked example, not a live trade</p>
         </div>
-        <span className="panel__tag">Sample data</span>
+        <span className="panel__tag">Sample alert</span>
       </div>
 
-      <p
-        style={{
-          fontSize: '0.78rem',
-          color: 'var(--muted)',
-          marginBottom: 2,
-        }}
-      >
-        Marked value
-      </p>
-      <p
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(2rem, 5vw, 2.6rem)',
-          fontWeight: 700,
-          letterSpacing: '-0.03em',
-          lineHeight: 1.05,
-          marginBottom: 6,
-        }}
-      >
-        {formatAud(latest)}
-      </p>
-      <p
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 6,
-          fontSize: '0.85rem',
-          fontWeight: 600,
-          color: change >= 0 ? 'var(--div-pos)' : 'var(--div-neg)',
-          marginBottom: 18,
-        }}
-      >
-        <ArrowRight size={15} style={{ transform: change >= 0 ? 'rotate(-45deg)' : 'rotate(45deg)' }} />
-        {change >= 0 ? '+' : ''}
-        {change.toFixed(1)}% across the period shown
-      </p>
-
-      <LineChart
-        data={scaled}
-        tone="var(--series-1)"
-        formatValue={(v) => `A$${Math.round(v / 1000)}k`}
-        pointLabels={{ low: 'Start', last: 'Today' }}
-        ariaLabel="Illustrative sample portfolio value across 44 sessions"
-      />
-
-      <div className="tiles" style={{ marginTop: 18 }}>
-        {HERO_TILES.map((t) => (
-          <div className="tile" key={t.label}>
-            <p className="tile__label">{t.label}</p>
-            <p className="tile__value">{t.value}</p>
-            {t.delta && (
-              <p className="tile__delta" data-dir={t.delta}>
-                {t.label === 'Marked this week' ? 'Sample movement' : ''}
-              </p>
-            )}
-          </div>
-        ))}
+      <div className="signal">
+        <div className="signal__row">
+          <span className="signal__k">Market</span>
+          <span className="signal__v">BTC/USD</span>
+        </div>
+        <div className="signal__row">
+          <span className="signal__k">Direction</span>
+          <span className="signal__v signal__v--buy">
+            Buy
+            <ArrowRight size={14} style={{ transform: 'rotate(-45deg)' }} />
+          </span>
+        </div>
+        <div className="signal__row">
+          <span className="signal__k">Entry</span>
+          <span className="signal__v">68,420</span>
+        </div>
+        <div className="signal__row">
+          <span className="signal__k">Stop-loss</span>
+          <span className="signal__v">66,900</span>
+        </div>
+        <div className="signal__row">
+          <span className="signal__k">Take-profit</span>
+          <span className="signal__v">71,600</span>
+        </div>
       </div>
 
+      <div className="signal__why">
+        <p className="signal__why-label">Why this idea</p>
+        <p>Momentum turned up after a higher low, with volume confirming the move.</p>
+      </div>
+
+      <p className="signal__note">
+        Illustrative sample. Not a live signal, not a forecast and not financial advice.
+      </p>
     </div>
   )
 }
